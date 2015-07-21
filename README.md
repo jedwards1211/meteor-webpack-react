@@ -43,6 +43,7 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 In one terminal:
 ```
 > cd webpack
+> npm install
 > npm run dev
 ```
 Once webpack-dev-server finishes building the bundle, it will print out a list of modules.

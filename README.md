@@ -7,7 +7,7 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
 * `require`/ES6 `import` let you avoid Meteor global variables/load order issues
 * `react-hot-loader` reloads React components without reloading the entire page
   when you make changes
-* If you `require` your styles with Webpack, it will also reload them without \
+* If you `require` your styles with Webpack, it will also reload them without
   reloading the entire page when you make changes to them
 * Using an npm module in the browser is as simple as `npm install` and `require`
   * This puts a large part of the React ecosystem (which revolves around Webpack/npm)

@@ -1,0 +1,21 @@
+<head>
+  <title>Todo List</title>
+  <script type="text/javascript">
+    if (!window.webpackBundleLoaded) {
+      // unfortunately it's not possible to make a URL relative to the current host with a different port,
+      // so the URL must be created by script like this if we want to test on devices besides localhost.
+      var scriptElem = document.createElement('script');
+      scriptElem.type = 'text/javascript';
+      scriptElem.src = /https?:\/\/[^:\/]+/.exec(window.location.href)[0] + ':9090/assets/bundle.js';
+      document.head.appendChild(scriptElem);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root" class="container">
+    <header>
+      <h1>Loading...</h1>
+    </header>
+  </div>
+</body>

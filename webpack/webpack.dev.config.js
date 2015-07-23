@@ -26,6 +26,5 @@ var jsLoader = _.find(config.module.loaders, function(loader) {
 });
 
 if (jsLoader) {
-  jsLoader.loaders = ['react-hot', jsLoader.loader];
-  delete jsLoader.loader;
+  jsLoader.loader = 'react-hot!' + jsLoader.loader;
 }

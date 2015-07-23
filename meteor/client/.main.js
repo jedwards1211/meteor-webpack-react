@@ -1,1 +1,0 @@
-../../webpack/dist/bundle.js

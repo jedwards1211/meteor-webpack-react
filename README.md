@@ -24,17 +24,17 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
 This product ships in dev mode by default.  To switch to production mode, do the following:
 ```
 > cd meteor/client
-> mv .main.js main.js
+> mv .prod prod
 ```
 
-And likewise, to switch back to dev mode, rename it back to `.main.js`.
+And likewise, to switch back to dev mode, rename it back to `.prod`.
 
-`meteor.html` contains a simple script that checks if this bundle has been loaded, and if
+`meteor.html` contains a simple script that checks if the prod bundle has been loaded, and if
 not, links in the webpack-dev-server bundle instead.
 
 ### Windows note
 
-`.main.js` is a soft link to `../../webpack/dist/bundle.js`.  I don't know
+`.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
 
@@ -59,11 +59,15 @@ In another terminal:
 > cd webpack
 > webpack
 > cd ../meteor/client
-> mv .main.js main.js
+> mv .prod prod
 > cd ..
 > meteor
 ```
 
-Note: the Meteor `react-packages`' `react-runtime-prod` package doesn't include the proper
-production version of React.  So instead of using it, I just load the production build in
-the Webpack prod config.
+## React production note
+
+The Meteor `react-packages`' `react-runtime-prod` package doesn't include the
+production build of React.  So instead of using that package, I include the production
+build of React in `meteor/.prod/client/react-with-addons-0.13.3.min.js`, and get it
+into Webpack by aliasing `react$` and `react/addons$` to a simple script that just does
+`export default window.React`.

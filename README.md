@@ -40,19 +40,12 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 
 ## Running (dev mode)
 
-In one terminal:
 ```
 > cd webpack
 > npm install
 > npm run dev
 ```
-Once webpack-dev-server finishes building the bundle, it will print out a list of modules.
-
-In another terminal:
-```
-> cd meteor
-> meteor
-```
+Make sure to wait for Meteor to say it's listening, and for webpack-dev-server to print out the list of modules.  The site won't work until both are ready.
 
 ## Running (prod mode)
 

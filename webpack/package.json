@@ -23,7 +23,7 @@
     "lodash": "^3.10.0"
   },
   "scripts": {
-    "dev": "node server.js",
+    "dev": "(node server.js & cd ../meteor && meteor &)| cat",
     "build": "webpack"
   },
   "author": "",

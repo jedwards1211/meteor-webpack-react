@@ -52,9 +52,8 @@ Make sure to wait for Meteor to say it's listening, and for webpack-dev-server t
 ```
 > cd webpack
 > webpack
-> cd ../meteor/client
+> cd ../meteor/
 > mv .prod prod
-> cd ..
 > meteor
 ```
 

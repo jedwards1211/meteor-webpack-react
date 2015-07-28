@@ -21,7 +21,7 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
 
 ### Windows note
 
-`.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
+`meteor/.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
 
@@ -32,7 +32,6 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 > npm install
 > npm run dev
 ```
-
 ## Running (prod mode)
 
 ```
@@ -40,6 +39,7 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 > npm install
 > npm run prod
 ```
+Make sure to wait for Meteor to say it's listening, and for webpack-dev-server to print out the list of modules.  The site won't work until both are ready.
 
 ## Production build
 

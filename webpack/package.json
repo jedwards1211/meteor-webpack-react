@@ -23,8 +23,9 @@
     "lodash": "^3.10.0"
   },
   "scripts": {
-    "dev": "node server.js",
-    "build": "webpack"
+    "dev": "(node server.js & cd ../meteor && (mv prod .prod || true) && meteor &) | cat",
+    "prod": "(webpack & cd ../meteor && (mv .prod prod || true) && meteor &) | cat",
+    "build": "webpack && cd ../meteor && (mv .prod prod || true) && meteor build ../dist"
   },
   "author": "",
   "license": "MIT"

@@ -19,19 +19,6 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
   * or you can use `url-loader` to `require` an image file and get a URL to stick in
     an `<img>` tag
 
-## Switching between dev/prod config
-
-This product ships in dev mode by default.  To switch to production mode, do the following:
-```
-> cd meteor/client
-> mv .prod prod
-```
-
-And likewise, to switch back to dev mode, rename it back to `.prod`.
-
-`meteor.html` contains a simple script that checks if the prod bundle has been loaded, and if
-not, links in the webpack-dev-server bundle instead.
-
 ### Windows note
 
 `.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
@@ -40,29 +27,26 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 
 ## Running (dev mode)
 
-In one terminal:
 ```
 > cd webpack
 > npm install
 > npm run dev
-```
-Once webpack-dev-server finishes building the bundle, it will print out a list of modules.
-
-In another terminal:
-```
-> cd meteor
-> meteor
 ```
 
 ## Running (prod mode)
 
 ```
 > cd webpack
-> webpack
-> cd ../meteor/client
-> mv .prod prod
-> cd ..
-> meteor
+> npm install
+> npm run prod
+```
+
+## Production build
+
+```
+> cd webpack
+> npm install
+> npm run build
 ```
 
 ## React production note

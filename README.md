@@ -19,6 +19,14 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
   * or you can use `url-loader` to `require` an image file and get a URL to stick in
     an `<img>` tag
 
+## How it works
+
+The `meteor` directory contains a `.prod` folder that is hidden for dev mode and unhidden (renamed to `prod`) for prod mode.
+
+In prod mode, only meteor is running, and it gets the webpack bundle via the soft link `meteor/prod/client/main.js`.  The React prod build is also in that folder, and the bundle gets it via a Webpack alias to a script that simply does `export default window.React`.  (I should change this soon, since I figured out how to recreate the prod build from the npm package using UglifyJS and Webpack's `DefinePlugin`.
+
+In dev mode, both webpack-dev-server and meteor run simultaneously on different ports (9090 and 3000, respectively).  A script in `index.html` detects if the prod bundle has been loaded, and if not, inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  React from npm is built into the bundle in dev mode.
+
 ### Windows note
 
 `meteor/.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
@@ -48,11 +56,3 @@ Make sure to wait for Meteor to say it's listening, and for webpack-dev-server t
 > npm install
 > npm run build
 ```
-
-## React production note
-
-The Meteor `react-packages`' `react-runtime-prod` package doesn't include the
-production build of React.  So instead of using that package, I include the production
-build of React in `meteor/.prod/client/react-with-addons-0.13.3.min.js`, and get it
-into Webpack by aliasing `react$` and `react/addons$` to a simple script that just does
-`export default window.React`.

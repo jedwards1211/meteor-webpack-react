@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var config = require('./webpack.config.base');
+var config = require('./webpack.config.client');
 var _ = require('lodash');
 
 var devProps = require('./devProps');

@@ -1,7 +1,7 @@
 import React from 'react';
 import BlazeTemplate from './BlazeTemplate';
 
-var Tasks = window.Tasks;
+import Tasks from '../both/Tasks';
 
 require('./App.css');
 

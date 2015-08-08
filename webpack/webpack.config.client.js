@@ -1,14 +1,15 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
   entry: [
     'babel/polyfill',
-    './app',
+    './client',
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.join(__dirname, 'assets'),
+    filename: 'client.bundle.js',
     publicPath: '/assets/',
   },
   resolve: {

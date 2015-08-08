@@ -1,23 +1,6 @@
-Tasks = new Mongo.Collection("tasks");
- 
-if (Meteor.isClient) {
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
-  });
-}
+var Tasks = new Mongo.Collection("tasks");
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    Meteor.publish('tasks', function() {
-      return Tasks.find({
-        $or: [
-          { private: {$ne: true} },
-          { owner: this.userId }
-        ]
-      });
-    });
-  });
-}
+export default Tasks;
 
 Meteor.methods({
   addTask: function (text) {

@@ -18,18 +18,22 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
   * or if you want to use Sass, you can `require` the Sass files
   * or you can use `url-loader` to `require` an image file and get a URL to stick in
     an `<img>` tag
+* If you use Webpack for your server code too, both the server and the client can `require`
+  shared code.  This way you can avoid creating global variables for Meteor collections or
+  anything else
 
 ## How it works
 
 The `meteor` directory contains a `.prod` folder that is hidden for dev mode and unhidden (renamed to `prod`) for prod mode.
 
-In prod mode, only meteor is running, and it gets the webpack bundle via the soft link `meteor/prod/client/main.js`.  The React prod build is also in that folder, and the bundle gets it via a Webpack alias to a script that simply does `export default window.React`.  (I should change this soon, since I figured out how to recreate the prod build from the npm package using UglifyJS and Webpack's `DefinePlugin`.
+In prod mode, only meteor is running, and it gets the webpack client and server bundles via the soft links `meteor/prod/client/main.js` and `meteor/server/main.js`.
 
-In dev mode, both webpack-dev-server and meteor run simultaneously on different ports (9090 and 3000, respectively).  A script in `index.html` detects if the prod bundle has been loaded, and if not, inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  React from npm is built into the bundle in dev mode.
+In dev mode, both webpack-dev-server and meteor run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `index.html` detects if the prod bundle has been loaded, and if not, inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.
 
 ### Windows note
 
-`meteor/.prod/client/main.js` is a soft link to `../../../webpack/dist/bundle.js`.  I don't know
+`meteor/.prod/client/main.js` is a soft link to `../../../webpack/assets/client.bundle.js`.  
+(Similarly for the server bundle.) I don't know
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
 
@@ -55,4 +59,12 @@ Make sure to wait for Meteor to say it's listening, and for webpack-dev-server t
 > cd webpack
 > npm install
 > npm run build
+```
+
+## Testing Production build
+
+```
+> cd webpack
+> npm install
+> npm run test-built
 ```

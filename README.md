@@ -1,6 +1,6 @@
 # meteor-webpack-react
 
-This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack.
+This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack.  There is only a little bit of code to remove if you want to use this as an app skeleton.
 
 ## Advantages over serving the UI straight out of the Meteor project
 
@@ -62,7 +62,7 @@ Make sure to wait for Meteor to say it's listening, and for webpack-dev-server t
 ```
 
 ## Testing Production build
-
+(i.e. smoke testing it)
 ```
 > cd webpack
 > npm install

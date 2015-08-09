@@ -22,6 +22,16 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
   shared code.  This way you can avoid creating global variables for Meteor collections or
   anything else
 
+## Note about `react-runtime` Meteor package
+
+**It isn't possible to get React from the `react-runtime` Meteor package _and_ use `react-hot-loader`, sorry.**
+`react-hot-loader` requires internal React modules and ends up loading a separate instance of React, which prevents
+it from working with the instance from `react-runtime`.  You can do one or the other, but not both.  I've opted to get React via Webpack in this project, because I want
+Meteor Development Group to bring Meteor up to ES6 module standards so that it can interoperate cleanly with other systems like Webpack.
+
+However, many people want to use other Meteor packages that depend on `react-runtime`, and this is possible, but
+you will not be able to use `react-hot-loader`.  I will make a branch that's configured this way soon.
+
 ## How it works
 
 The `meteor` directory contains a `.prod` folder that is hidden for dev mode and unhidden (renamed to `prod`) for prod mode.

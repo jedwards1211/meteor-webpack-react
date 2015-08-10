@@ -17,7 +17,7 @@ export default React.createClass({
     Blaze.remove(this.view);
   },
   render() {
-    var {component, template, ...props} = this.props;
+    var {component, ...props} = this.props;
     props.ref = 'root';
 
     return React.createElement(

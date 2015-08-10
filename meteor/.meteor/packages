@@ -6,6 +6,5 @@
 
 meteor-platform
 react-meteor-data
-babel-runtime
 accounts-ui
 accounts-password

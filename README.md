@@ -24,11 +24,12 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
 
 ## How it works
 
-The `meteor` directory contains a `.prod` folder that is hidden for dev mode and unhidden (renamed to `prod`) for prod mode.
+The `meteor` directory contains `dev` and `prod` folders for development and production mode.  The script to run
+dev mode hides `prod` (as `.prod`) and unhides `dev`, and vice versa for the script to run prod mode.
 
 In prod mode, only meteor is running, and it gets the webpack client and server bundles via the soft links `meteor/prod/client/main.js` and `meteor/server/main.js`.
 
-In dev mode, both webpack-dev-server and meteor run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `index.html` detects if the prod bundle has been loaded, and if not, inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.
+In dev mode, both webpack-dev-server and meteor run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `index.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
 
 ### Windows note
 
@@ -44,6 +45,8 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 > npm install
 > npm run dev
 ```
+Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
+
 ## Running (prod mode)
 
 ```
@@ -51,7 +54,7 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 > npm install
 > npm run prod
 ```
-Make sure to wait for Meteor to say it's listening, and for webpack-dev-server to print out the list of modules.  The site won't work until both are ready.
+Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
 ## Production build
 
@@ -60,6 +63,7 @@ Make sure to wait for Meteor to say it's listening, and for webpack-dev-server t
 > npm install
 > npm run build
 ```
+
 
 ## Testing Production build
 (i.e. smoke testing it)

@@ -29,7 +29,7 @@ dev mode hides `prod` (as `.prod`) and unhides `dev`, and vice versa for the scr
 
 In prod mode, `meteor` gets the webpack client and server bundles via the soft links `meteor/prod/client/main.js` and `meteor/server/main.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
 
-In dev mode, both `webpack-dev-server` and `meteor` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `index.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
+In dev mode, both `webpack-dev-server` and `meteor` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor/dev/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
 
 ### Windows note
 

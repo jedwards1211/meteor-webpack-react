@@ -8,11 +8,9 @@ export default React.createClass({
   },
 
   getDefaultProps() {
-    return { component: 'div' };
-  },
-
-  componentDidMount() {
-    this.view = Blaze.render(this.props.template, React.findDOMNode(this.refs.root));
+    return {
+      component: 'div',
+    };
   },
 
   // we don't want to re-render this component if parent changes
@@ -20,13 +18,17 @@ export default React.createClass({
     return false;
   },
 
+  componentDidMount() {
+    this.view = Blaze.render(this.props.template, React.findDOMNode(this.refs.root));
+  },
+
   componentWillUnmount() {
     Blaze.remove(this.view);
   },
 
   render() {
-    let {component, template, ...props} = this.props;
+    let {component, ...props} = this.props;
     props.ref = 'root';
-    return React.createElement( component, props);
+    return React.createElement(component, props);
   },
 });

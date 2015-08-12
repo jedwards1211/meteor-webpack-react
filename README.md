@@ -47,6 +47,16 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
 
+## Debugging/Profiling Server (dev mode)
+
+```
+> npm install -g node-inspector
+> cd webpack
+> npm install
+> npm run dev-debug
+```
+Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
+
 ## Running (prod mode)
 
 ```

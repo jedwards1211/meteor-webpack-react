@@ -23,6 +23,7 @@
   },
   "scripts": {
     "dev": "scripts/dev.sh",
+    "dev-debug": "scripts/dev-debug.sh",
     "prod": "scripts/prod.sh",
     "build": "scripts/build.sh",
     "test-built": "scripts/test-built.sh"

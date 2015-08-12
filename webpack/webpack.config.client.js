@@ -28,4 +28,8 @@ module.exports = {
       }, 
     ],
   },
+  plugins: [
+    new webpack.PrefetchPlugin("react"),
+    new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment")
+  ]
 };

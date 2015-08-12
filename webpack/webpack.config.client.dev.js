@@ -13,10 +13,17 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
   output: _.assign(_.cloneDeep(config.output), {
     publicPath: devProps.baseUrl + '/assets/',
   }),
-  plugins: [
+  plugins: (config.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-  ],
+  ]),
+  devServer: {
+    publicPath: devProps.baseUrl + '/assets/',
+    hot: true,
+    historyApiFallback: true,
+    contentBase: devProps.contentBase,
+    port: devProps.webpackPort,
+  }
 });
 
 // inject react-hot loader

@@ -2,15 +2,21 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
-  entry: [
-    'babel/polyfill',
-    './client',
-  ],
+  devtool: 'eval',
+  entry: {
+    client: [
+      'babel/polyfill',
+      './client',
+    ],
+    react: [
+      './client/react-runtime.js',
+    ],
+  },
   output: {
     path: path.join(__dirname, 'assets'),
-    filename: 'client.bundle.js',
+    filename: '[name].bundle.js',
     publicPath: '/assets/',
+    pathinfo: true
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -20,7 +26,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel?stage=0',
-        exclude: /node_modules|vendor/,
+        exclude: /node_modules|react-runtime\.js/,
       }, 
       {
         test: /\.css$/,
@@ -29,7 +35,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.PrefetchPlugin("react/addons"),
     new webpack.PrefetchPlugin("react"),
-    new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment")
+    new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment"),
+    new webpack.optimize.CommonsChunkPlugin('react', 'react.bundle.js'),
   ]
 };

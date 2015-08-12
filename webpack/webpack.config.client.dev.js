@@ -6,10 +6,12 @@ var devProps = require('./devProps');
 
 var config = module.exports = _.assign(_.cloneDeep(config), {
   devtool: 'source-map',
-  entry: [
-    'webpack-dev-server/client?' + devProps.baseUrl,
-    'webpack/hot/only-dev-server',
-  ].concat(config.entry),
+  entry: _.assign({}, config.entry, {
+    client: [
+      'webpack-dev-server/client?' + devProps.baseUrl,
+      'webpack/hot/only-dev-server',
+    ].concat(config.entry.client),
+  }),
   output: _.assign(_.cloneDeep(config.output), {
     publicPath: devProps.baseUrl + '/assets/',
   }),

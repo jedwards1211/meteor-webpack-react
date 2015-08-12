@@ -19,7 +19,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel?stage=0',
-        exclude: /node_modules|vendor/,
+        exclude: /node_modules/,
       }, 
     ],
   },

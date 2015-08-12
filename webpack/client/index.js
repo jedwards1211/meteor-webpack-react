@@ -5,8 +5,6 @@ Accounts.ui.config({
   passwordSignupFields: "USERNAME_ONLY"
 });
 
-window.webpackBundleLoaded = true;
-
 var prevOnload = window.onload;
 
 window.onload = function() {

@@ -1,9 +1,10 @@
 #!/bin/sh
 
-cd ../dist
+pwd &&
+cd dist
 if [ ! -d bundle ]
 then
-  tar -xvf meteor.tar.gz
+  tar -xvf meteor_core.tar.gz
   (cd bundle/programs/server && npm install)
 fi
 cd bundle

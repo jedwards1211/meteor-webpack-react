@@ -12,6 +12,7 @@ rm -rvf assets
   done) &&
 
   cd meteor_core &&
+  pwd &&
   ([ ! -d dev   ] || mv dev .dev  ) &&
   ([ ! -d .prod ] || mv .prod prod) &&
   meteor run --production &

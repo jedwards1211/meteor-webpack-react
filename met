@@ -2,7 +2,7 @@
 
 if [ -f $1 ];
 then
-  eval "cd webpack && npm run dev"
+  eval "npm run dev"
 else
   eval "cd meteor_core && meteor $@"
 fi

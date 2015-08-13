@@ -6,10 +6,10 @@ module.exports = {
   entry: {
     client: [
       'babel/polyfill',
-      './app/main_client.js',
+      '../app/main_client.js',
     ],
     react: [
-      './webpack/react-runtime.js',
+      './react-runtime.js',
     ],
   },
   output: {

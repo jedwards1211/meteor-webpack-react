@@ -1,6 +1,5 @@
 #!/bin/sh
 
-pwd &&
 cd dist
 if [ ! -d bundle ]
 then

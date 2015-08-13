@@ -6,4 +6,4 @@ cd meteor_core
 [ ! -d .prod ] || mv .prod prod
 [ ! -d dev   ] || mv dev .dev
 rm -rvf ../dist
-meteor build ../dist
+METEOR_SETTINGS=$(cat ../settings/prod.json) && meteor build ../dist

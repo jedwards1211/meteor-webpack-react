@@ -16,5 +16,5 @@ rm -rvf assets
   ([ ! -d prod ] || mv prod .prod) &&
   ([ ! -d .dev ] || mv .dev dev  ) &&
   export NODE_OPTIONS='--debug=5858' &&
-  meteor &
+  meteor --settings ../settings/devel.json &
 ) | cat

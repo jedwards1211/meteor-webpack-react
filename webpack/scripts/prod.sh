@@ -15,5 +15,6 @@ rm -rvf assets
   pwd &&
   ([ ! -d dev   ] || mv dev .dev  ) &&
   ([ ! -d .prod ] || mv .prod prod) &&
-  meteor run --production &
+
+  meteor run --production --settings ../settings/prod.json &
 ) | cat

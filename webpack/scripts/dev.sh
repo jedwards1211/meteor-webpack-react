@@ -16,6 +16,6 @@ rm -rvf assets
   cd meteor_core &&
   ([ ! -d prod ] || mv prod .prod) &&
   ([ ! -d .dev ] || mv .dev dev  ) &&
-  meteor &
+  meteor --settings ../settings/devel.json &
 ) | cat
 

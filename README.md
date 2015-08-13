@@ -1,8 +1,11 @@
 # meteor-webpack-react
 
-This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack. The master branch has a skeleton with just enough to start out.
+A Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
+webpack-dev-server is used with react-hot-loader.
 
-## Advantages over serving the UI straight out of the Meteor project
+There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
+
+## Advantages of packaging with Webpack instead of Meteor
 
 * `require`/ES6 `import` let you avoid Meteor global variables/load order issues
 * `react-hot-loader` reloads React components without reloading the entire page

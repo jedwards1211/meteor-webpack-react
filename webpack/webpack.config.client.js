@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'babel/polyfill',
-    './app/main_client',
+    '../app/main_client',
   ],
   output: {
     path: path.join(__dirname, 'assets'),

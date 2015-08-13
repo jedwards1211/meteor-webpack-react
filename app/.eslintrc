@@ -1,3 +1,6 @@
 {
-  "extends": "eslint-config-airbnb"
+  "extends": "eslint-config-airbnb",
+  "rules": {
+    "prefer-const": 0
+  }
 }

@@ -4,13 +4,14 @@
   "description": "A port of simple-todos to Webpack/React on the frontend",
   "repository": "https://www.github.com/jedwards1211/meteor-webpack-react",
   "devDependencies": {
-    "babel-eslint": "^3.1.9",
+    "babel-eslint": "^4.0.5",
     "babel-loader": "^5.1.2",
     "css-loader": "^0.15.3",
-    "eslint-plugin-react": "^2.3.0",
+    "eslint-config-airbnb": "0.0.7",
+    "eslint-plugin-react": "^3.2.2",
     "node-libs-browser": "^0.5.2",
-    "style-loader": "^0.12.3",
     "react-hot-loader": "^1.2.7",
+    "style-loader": "^0.12.3",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
   },
@@ -26,7 +27,8 @@
     "dev-debug": "webpack/scripts/dev-debug.sh",
     "prod": "webpack/scripts/prod.sh",
     "build": "webpack/scripts/build.sh",
-    "test-built": "webpack/scripts/test-built.sh"
+    "test-built": "webpack/scripts/test-built.sh",
+    "lint": "eslint app"
   },
   "author": "",
   "license": "MIT"

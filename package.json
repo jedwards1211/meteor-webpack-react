@@ -22,11 +22,11 @@
     "react": "^0.13.3"
   },
   "scripts": {
-    "dev": "scripts/dev.sh",
-    "dev-debug": "scripts/dev-debug.sh",
-    "prod": "scripts/prod.sh",
-    "build": "scripts/build.sh",
-    "test-built": "scripts/test-built.sh"
+    "dev": "webpack/scripts/dev.sh",
+    "dev-debug": "webpack/scripts/dev-debug.sh",
+    "prod": "webpack/scripts/prod.sh",
+    "build": "webpack/scripts/build.sh",
+    "test-built": "webpack/scripts/test-built.sh"
   },
   "author": "",
   "license": "MIT"

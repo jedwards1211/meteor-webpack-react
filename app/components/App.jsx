@@ -1,8 +1,7 @@
 /* global ReactMeteorData */
 import React from 'react';
 import BlazeTemplate from './BlazeTemplate';
-import Users from '../collections/users';
-import Posts from '../collections/posts';
+import {Users, Posts} from '../collections';
 import './App.css';
 
 Meteor.call('sayHello', function(err, res) {

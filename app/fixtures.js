@@ -1,5 +1,5 @@
 /* global Accounts */
-import Posts from './collections/posts';
+import {Posts} from './collections';
 
 export function createPosts() {
   console.log('Creating fake posts');

@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'babel/polyfill',
-    './server',
+    './app/main_server',
   ],
   output: {
     path: path.join(__dirname, 'assets'),

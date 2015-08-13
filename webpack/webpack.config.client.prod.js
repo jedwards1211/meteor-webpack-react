@@ -10,7 +10,6 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
       }
     }),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     }),

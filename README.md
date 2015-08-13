@@ -1,6 +1,6 @@
 # meteor-webpack-react
 
-This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack.  There is only a little bit of code to remove if you want to use this as an app skeleton.  (But we're about to put it into a branch so that `master` is just an empty skeleton).
+This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack. The master branch has a skeleton with just enough to start out.
 
 ## Advantages over serving the UI straight out of the Meteor project
 
@@ -24,12 +24,12 @@ This is a port of the Meteor sample-todos tutorial to a React UI built by Webpac
 
 ## How it works
 
-The `meteor` directory contains `dev` and `prod` folders for development and production mode.  The script to run
+The `meteor_core` directory contains `dev` and `prod` folders for development and production mode.  The script to run
 dev mode hides `prod` (as `.prod`) and unhides `dev`, and vice versa for the script to run prod mode.
 
-In prod mode, `meteor` gets the webpack client and server bundles via the soft links `meteor/prod/client/main.js` and `meteor/server/main.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
+In prod mode, `meteor_core` gets the webpack client and server bundles via the soft links `meteor_core/prod/client/main.js` and `meteor_core/server/main.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
 
-In dev mode, both `webpack-dev-server` and `meteor` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor/dev/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
+In dev mode, both `webpack-dev-server` and `meteor_core` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor_core/dev/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
 
 ### If you need to use Meteor packages that depend on the `react` Meteor package
 
@@ -47,7 +47,7 @@ with a local fork that exports React from a Webpack Commons Chunk.
 
 ### Windows note
 
-`meteor/.prod/client/main.js` is a soft link to `../../../webpack/assets/client.bundle.js`.  
+`meteor_core/.prod/client/main.js` is a soft link to `../../../webpack/assets/client.bundle.js`.  
 (Similarly for the server bundle.) I don't know
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
@@ -55,7 +55,6 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 ## Running (dev mode)
 
 ```
-> cd webpack
 > npm install
 > npm run dev
 ```
@@ -65,7 +64,6 @@ Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-
 
 ```
 > npm install -g node-inspector
-> cd webpack
 > npm install
 > npm run dev-debug
 ```
@@ -74,7 +72,6 @@ Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 ## Running (prod mode)
 
 ```
-> cd webpack
 > npm install
 > npm run prod
 ```
@@ -83,16 +80,19 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 ## Production build
 
 ```
-> cd webpack
 > npm install
 > npm run build
 ```
 
 
 ## Testing Production build
+
 (i.e. smoke testing it)
 ```
-> cd webpack
 > npm install
 > npm run test-built
 ```
+
+## Meteor settings
+
+Put your settings in `settings/devel.json` & `settings/prod.json` and they will automatically load when running in development, production and build modes.

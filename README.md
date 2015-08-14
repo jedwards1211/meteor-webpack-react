@@ -97,6 +97,17 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 > npm run test-built
 ```
 
-## Meteor settings
+
+## Meteor Settings
 
 Put your settings in `settings/devel.json` & `settings/prod.json` and they will automatically load when running in development, production and build modes.
+
+
+## Running Meteor Commands
+
+As a convenince you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor_core` and then run `meteor` from that directory as well.
+
+```
+./met  --version
+./met search moment
+```

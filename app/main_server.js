@@ -1,4 +1,4 @@
-import {Posts} from './collections';
+import {Posts} from 'app/collections';
 import {createPosts, createUsers} from './fixtures';
 // we don't call this so we're just importing to initialize file
 import './method_example';

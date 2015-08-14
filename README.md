@@ -60,7 +60,7 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 
 ```
 > npm install
-> npm run dev
+> ./dev
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
 
@@ -69,7 +69,7 @@ Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-
 ```
 > npm install -g node-inspector
 > npm install
-> npm run dev-debug
+> ./debug
 ```
 Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
@@ -77,7 +77,7 @@ Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
 ```
 > npm install
-> npm run prod
+> ./prod
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
@@ -85,7 +85,7 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 
 ```
 > npm install
-> npm run build
+> ./build
 ```
 
 
@@ -94,7 +94,7 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 (i.e. smoke testing it)
 ```
 > npm install
-> npm run test-built
+> ./test-built
 ```
 
 

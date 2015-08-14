@@ -1,0 +1,1 @@
+../../../webpack/assets/client.bundle.js

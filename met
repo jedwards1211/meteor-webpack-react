@@ -1,8 +1,2 @@
 #!/bin/bash
-
-if [ -f $1 ];
-then
-  eval "cd webpack && npm run dev"
-else
-  eval "cd meteor_core && meteor $@"
-fi
+cd meteor_core && meteor $@

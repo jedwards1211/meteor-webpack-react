@@ -1,8 +1,12 @@
 # meteor-webpack-react
 
-This is a port of the Meteor sample-todos tutorial to a React UI built by Webpack. The master branch has a skeleton with just enough to start out.
+THis is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
+webpack-dev-server is used with react-hot-loader.  There are a bunch of run and build scripts to make things more
+convenient.
 
-## Advantages over serving the UI straight out of the Meteor project
+There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
+
+## Advantages of packaging with Webpack instead of Meteor
 
 * `require`/ES6 `import` let you avoid Meteor global variables/load order issues
 * `react-hot-loader` reloads React components without reloading the entire page
@@ -56,7 +60,7 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 
 ```
 > npm install
-> npm run dev
+> ./dev
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
 
@@ -65,7 +69,7 @@ Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-
 ```
 > npm install -g node-inspector
 > npm install
-> npm run dev-debug
+> ./debug
 ```
 Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
@@ -73,7 +77,7 @@ Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
 ```
 > npm install
-> npm run prod
+> ./prod
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
@@ -81,7 +85,7 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 
 ```
 > npm install
-> npm run build
+> ./build
 ```
 
 
@@ -90,9 +94,20 @@ Make sure to wait for Meteor to say it's listening, and for the client and serve
 (i.e. smoke testing it)
 ```
 > npm install
-> npm run test-built
+> ./test-built
 ```
 
-## Meteor settings
+
+## Meteor Settings
 
 Put your settings in `settings/devel.json` & `settings/prod.json` and they will automatically load when running in development, production and build modes.
+
+
+## Running Meteor Commands
+
+As a convenince you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor_core` and then run `meteor` from that directory as well.
+
+```
+./met  --version
+./met search moment
+```

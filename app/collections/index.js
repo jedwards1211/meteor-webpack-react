@@ -1,8 +1,3 @@
 /* global Mongo, Meteor */
-let Users = Meteor.users;
-let Posts = new Mongo.Collection('posts');
-
-export default {
-  Users,
-  Posts,
-};
+export const Users = Meteor.users;
+export const Posts = new Mongo.Collection('posts');

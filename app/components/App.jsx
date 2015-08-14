@@ -3,7 +3,7 @@ import BlazeTemplate from './BlazeTemplate';
 
 import Tasks from '../collections/Tasks';
 
-require('./App.css');
+import './App.css';
 
 var Task = React.createClass({
   propTypes: {

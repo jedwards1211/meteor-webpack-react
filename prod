@@ -3,8 +3,8 @@
 cd webpack
 rm -rvf assets
 (
-  env NODE_ENV=production webpack --config webpack.config.client.prod.js --progress --colors --watch &
-  env NODE_ENV=production webpack --config webpack.config.server.prod.js --progress --colors --watch &
+  env NODE_ENV=production ../node_modules/webpack/bin/webpack.js --config webpack.config.client.prod.js --progress --colors --watch &
+  env NODE_ENV=production  ../node_modules/webpack/bin/webpack.js --config webpack.config.server.prod.js --progress --colors --watch &
 
   # wait for bundles to be created
   (while : ; do

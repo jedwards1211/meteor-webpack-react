@@ -3,7 +3,8 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'babel/polyfill',
+    '../lib/core-js-no-number',
+    'regenerator/runtime',
     '../app/main_server',
   ],
   output: {
@@ -14,7 +15,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      app: path.join(__dirname, '../app')
+      app: path.join(__dirname, '../app'),
     },
   },
   module: {
@@ -22,7 +23,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel?stage=0',
-        exclude: /node_modules|vendor/,
+        exclude: /node_modules|lib/,
       },
     ],
   },

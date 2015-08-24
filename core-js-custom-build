@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# I really wish I knew a cleaner, more portable way to extract the version number...
+CORE_JS_VERSION=`grep -oP '"version":\s*"\K.*(?=")' node_modules/babel-core/node_modules/core-js/package.json`
+
+[ ! -d lib ] && mkdir lib
+
+if [ ! -f lib/core-js-no-number-${CORE_JS_VERSION}.js ]
+then
+  echo Building core-js@${CORE_JS_VERSION} without ES6 number constructor...
+  cd node_modules/babel-core/node_modules/core-js
+  npm install
+  grunt build:es5,es6,es7,js,web --blacklist=es6.number.constructor --path=../../../../lib/core-js-no-number-${CORE_JS_VERSION}
+  cd ../../../../lib
+  ln -sf core-js-no-number-${CORE_JS_VERSION}.js core-js-no-number.js
+else
+  echo core-js@${CORE_JS_VERSION} without ES6 number constructor is up to date.
+fi

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+./core-js-custom-build
+
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd -P`
 popd > /dev/null

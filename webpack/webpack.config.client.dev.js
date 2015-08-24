@@ -21,6 +21,7 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
   ]),
   devServer: {
     publicPath: devProps.baseUrl + '/assets/',
+    host: devProps.host,
     hot: true,
     historyApiFallback: true,
     contentBase: devProps.contentBase,

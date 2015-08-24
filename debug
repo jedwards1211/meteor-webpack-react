@@ -1,21 +1,33 @@
-#!/bin/sh
+#!/bin/bash
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd -P`
+popd > /dev/null
 
-cd webpack
-rm -rvf assets
+WEBPACK_DIR=$SCRIPTPATH/webpack
+METEOR_DIR=$SCRIPTPATH/meteor_core
+
+rm -rvf $METEOR_DIR/server/*
+rm -rvf $METEOR_DIR/client/*
+rm -rvf $WEBPACK_DIR/assets
+
+cd $WEBPACK_DIR
 (
   node-inspector &
-  webpack-dev-server --config webpack.config.client.dev.js --progress --colors &
-  webpack --config webpack.config.server.js --watch &
+  $SCRIPTPATH/node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.client.dev.js --progress --colors &
+  $SCRIPTPATH/node_modules/webpack/bin/webpack.js --config webpack.config.server.js --progress --colors --watch &
 
   # wait for server bundle to be output
+  SERVER_BUNDLE="assets/server.bundle.js"
   (while : ; do
-    [ -f 'assets/server.bundle.js' ] && break
+    [ -f "$SERVER_BUNDLE" ] && break
     sleep 1
   done) &&
 
-  cd ../meteor_core &&
-  ([ ! -d prod ] || mv prod .prod) &&
-  ([ ! -d .dev ] || mv .dev dev  ) &&
+  cd $METEOR_DIR
+  ln -s $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
+  ln -s $WEBPACK_DIR/loadClientBundle.html client/loadClientBundle.html &&
   export NODE_OPTIONS='--debug=5858' &&
   meteor --settings ../settings/devel.json &
 ) | cat
+
+

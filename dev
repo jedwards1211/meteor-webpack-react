@@ -1,22 +1,32 @@
-#!/bin/sh
+#!/bin/bash
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd -P`
+popd > /dev/null
 
-cd webpack
+WEBPACK_DIR=$SCRIPTPATH/webpack
+METEOR_DIR=$SCRIPTPATH/meteor_core
+
+rm -rvf $METEOR_DIR/server/*
+rm -rvf $METEOR_DIR/client/*
+
+cd $WEBPACK_DIR
 rm -rvf assets
 (
   # the client dev config is redundantly built beforehand so there will be a copy of
   # the react commons chunk on disk for the react-runtime fork to pick up
-  webpack-dev-server --config webpack.config.client.dev.js --progress --colors &
-  webpack --config webpack.config.server.js --progress --colors --watch &
+  $SCRIPTPATH/node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.client.dev.js --progress --colors &
+  $SCRIPTPATH/node_modules/webpack/bin/webpack.js --config webpack.config.server.js --progress --colors --watch &
 
   # wait for server bundle to be output
+  SERVER_BUNDLE="assets/server.bundle.js"
   (while : ; do
-    [ -f 'assets/server.bundle.js' ] && break
+    [ -f "$SERVER_BUNDLE" ] && break
     sleep 1
   done) &&
 
-  cd ../meteor_core &&
-  ([ ! -d prod ] || mv prod .prod) &&
-  ([ ! -d .dev ] || mv .dev dev  ) &&
+  cd $METEOR_DIR
+  ln -s $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
+  ln -s $WEBPACK_DIR/loadClientBundle.html client/loadClientBundle.html &&
   meteor --settings ../settings/devel.json &
 ) | cat
 

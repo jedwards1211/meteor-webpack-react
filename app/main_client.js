@@ -3,12 +3,11 @@ import App from './components/App';
 import './methods';
 
 Accounts.ui.config({
-  passwordSignupFields: "USERNAME_ONLY"
+  passwordSignupFields: 'USERNAME_ONLY',
 });
 
-var prevOnload = window.onload;
+console.log('Running on client only');
 
-window.onload = function() {
-  if (prevOnload) prevOnload();
+Meteor.startup(() => {
   React.render(<App/>, document.getElementById('root'));
-};
+});

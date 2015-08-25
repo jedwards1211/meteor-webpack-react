@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# I really wish I knew a cleaner, more portable way to extract the version number...
-CORE_JS_VERSION=`grep -oP '"version":\s*"\K.*(?=")' node_modules/babel-core/node_modules/core-js/package.json`
+CORE_JS_VERSION=`node echoPackageVersion.js node_modules/babel-core/node_modules/core-js/package.json`
 
 [ ! -d lib ] && mkdir lib
 

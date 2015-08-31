@@ -9,6 +9,8 @@
     "css-loader": "^0.15.3",
     "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "^3.2.2",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
     "node-libs-browser": "^0.5.2",
     "react-hot-loader": "^1.2.7",
     "style-loader": "^0.12.3",
@@ -29,7 +31,8 @@
     "prod": "webpack/scripts/prod.sh",
     "build": "webpack/scripts/build.sh",
     "test-built": "webpack/scripts/test-built.sh",
-    "lint": "eslint app"
+    "lint": "eslint app",
+    "build-core-js": "grunt --gruntfile node_modules/babel-core/node_modules/core-js/Gruntfile.js build:es5,es6,es7,js,web --blacklist=es6.number.constructor --path=core-js-no-number"
   },
   "author": "",
   "license": "MIT"

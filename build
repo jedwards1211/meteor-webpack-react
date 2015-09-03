@@ -9,8 +9,7 @@ popd > /dev/null
 WEBPACK_DIR=$SCRIPTPATH/webpack
 METEOR_DIR=$SCRIPTPATH/meteor_core
 
-rm -rvf $METEOR_DIR/server/*
-rm -rvf $METEOR_DIR/client/*
+[ -f $METEOR_DIR/client/loadClientBundle.html ] && rm $METEOR_DIR/client/loadClientBundle.html
 
 SERVER_BUNDLE="assets/server.bundle.js"
 CLIENT_BUNDLE="assets/client.bundle.js"
@@ -19,7 +18,7 @@ cd $WEBPACK_DIR
 env NODE_ENV=production $SCRIPTPATH/node_modules/webpack/bin/webpack.js --config webpack.config.client.prod.js --progress --colors
 env NODE_ENV=production $SCRIPTPATH/node_modules/webpack/bin/webpack.js --config webpack.config.server.prod.js --progress --colors
 cd $METEOR_DIR
-ln -s $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js
-ln -s $WEBPACK_DIR/$CLIENT_BUNDLE client/client.bundle.js
+ln -sf $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js
+ln -sf $WEBPACK_DIR/$CLIENT_BUNDLE client/client.bundle.js
 rm -rvf ../dist
 METEOR_SETTINGS=$(cat ../settings/prod.json) && meteor build ../dist

@@ -58,6 +58,8 @@ to rename it to `main.js`* so that Meteor loads it after everything else.
 
 ## Running (dev mode)
 
+**Note:** make sure you are forwarding port 9090 (as well as the Meteor port) if you want to test on other devices via LAN.
+
 ```
 > npm install
 > ./dev

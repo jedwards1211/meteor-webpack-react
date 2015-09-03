@@ -9,8 +9,7 @@ popd > /dev/null
 WEBPACK_DIR=$SCRIPTPATH/webpack
 METEOR_DIR=$SCRIPTPATH/meteor_core
 
-rm -rvf $METEOR_DIR/server/*
-rm -rvf $METEOR_DIR/client/*
+[ -f $METEOR_DIR/client/loadClientBundle.html ] && rm $METEOR_DIR/client/loadClientBundle.html
 
 cd $WEBPACK_DIR
 rm -rvf assets
@@ -27,7 +26,7 @@ rm -rvf assets
   done) &&
 
   cd $METEOR_DIR
-  ln -s $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
-  ln -s $WEBPACK_DIR/$CLIENT_BUNDLE client/client.bundle.js &&
+  ln -sf $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
+  ln -sf $WEBPACK_DIR/$CLIENT_BUNDLE client/client.bundle.js &&
   meteor run --production --settings ../settings/prod.json &
 ) | cat

@@ -9,11 +9,10 @@ popd > /dev/null
 WEBPACK_DIR=$SCRIPTPATH/webpack
 METEOR_DIR=$SCRIPTPATH/meteor_core
 
-rm -rvf $METEOR_DIR/server/*
-rm -rvf $METEOR_DIR/client/*
-rm -rvf $WEBPACK_DIR/assets
+[ -f $METEOR_DIR/client/client.bundle.js ] && rm $METEOR_DIR/client/client.bundle.js
 
 cd $WEBPACK_DIR
+rm -rvf assets
 (
   node-inspector &
   $SCRIPTPATH/node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.client.dev.js --progress --colors &
@@ -27,8 +26,8 @@ cd $WEBPACK_DIR
   done) &&
 
   cd $METEOR_DIR
-  ln -s $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
-  ln -s $WEBPACK_DIR/loadClientBundle.html client/loadClientBundle.html &&
+  ln -sf $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js &&
+  ln -sf $WEBPACK_DIR/loadClientBundle.html client/loadClientBundle.html &&
   export NODE_OPTIONS='--debug=5858' &&
   meteor --settings ../settings/devel.json &
 ) | cat

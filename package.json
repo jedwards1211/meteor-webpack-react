@@ -13,7 +13,9 @@
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "node-libs-browser": "^0.5.2",
+    "react-transform-catch-errors": "^0.1.1",
     "react-transform-webpack-hmr": "^0.1.4",
+    "redbox-react": "^1.0.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"

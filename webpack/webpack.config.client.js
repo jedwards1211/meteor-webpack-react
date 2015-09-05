@@ -23,7 +23,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel?stage=0',
+        loader: 'babel',
         exclude: /node_modules|lib/,
       },
       {

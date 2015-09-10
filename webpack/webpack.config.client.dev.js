@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var config = require('./webpack.config.client');
 var _ = require('lodash');
-
 var devProps = require('./devProps');
 
 var config = module.exports = _.assign(_.cloneDeep(config), {
@@ -31,14 +30,3 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
     port: devProps.webpackPort,
   }
 });
-
-// inject react-hot loader
-
-var jsLoader = _.find(config.module.loaders, function(loader) {
-  return loader.test.test('.js');
-});
-
-if (jsLoader) {
-  jsLoader.loader = 'react-hot!' + jsLoader.loader;
-}
-

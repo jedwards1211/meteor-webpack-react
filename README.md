@@ -1,7 +1,7 @@
 # meteor-webpack-react
 
 THis is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
-webpack-dev-server is used with react-hot-loader.  There are a bunch of run and build scripts to make things more
+webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more
 convenient.
 
 There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
@@ -9,7 +9,7 @@ There is a port of the Meteor simple-todos tutorial to this stack on the `simple
 ## Advantages of packaging with Webpack instead of Meteor
 
 * `require`/ES6 `import` let you avoid Meteor global variables/load order issues
-* `react-hot-loader` reloads React components without reloading the entire page
+* `react-transform` reloads React components without reloading the entire page
   when you make changes
 * If you `require` your styles with Webpack, it will also reload them without
   reloading the entire page when you make changes to them
@@ -39,10 +39,10 @@ In dev mode, both `webpack-dev-server` and `meteor_core` run simultaneously on d
 
 This is where it gets tricky, but there is an experimental solution in the `react-commons` branch.
 
-`react-hot-loader` requires many internal React modules, thus it doesn't work with components
+`react-transform` requires many internal React modules, thus it doesn't work with components
 created by an instance of React loaded from `react-runtime-dev`.
 
-But if React is loaded by Webpack, then the the modules required by `react-hot-loader`
+But if React is loaded by Webpack, then the the modules required by `react-transform`
 will be the same as in that instance of React.
 
 This poses a problem if you want to use any Meteor packages that depend on the `react` package,
@@ -107,9 +107,9 @@ Put your settings in `settings/devel.json` & `settings/prod.json` and they will 
 
 ## Running Meteor Commands
 
-As a convenince you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor_core` and then run `meteor` from that directory as well.
+As a convenience you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor_core` and then run `meteor` from that directory as well.
 
 ```
 ./met  --version
-./met search moment
+./met search simple-schema
 ```

@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: [
-    '../lib/core-js-no-number',
+    './lib/core-js-no-number',
     'regenerator/runtime',
     '../app/main_client',
   ],

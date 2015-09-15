@@ -2,7 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
   entry: [
     './lib/core-js-no-number',
     'regenerator/runtime',

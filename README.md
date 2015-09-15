@@ -56,6 +56,10 @@ with a local fork that exports React from a Webpack Commons Chunk.
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
 
+## Requirements
+
+There have been dependency issues with old versions of Node and NPM.  Please try at least Node v0.10.36 and npm v1.4.28 before repording any issues about missing dependencies.
+
 ## Running (dev mode)
 
 **Note:** make sure you are forwarding port 9090 (as well as the Meteor port) if you want to test on other devices via LAN.

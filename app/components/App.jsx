@@ -1,12 +1,14 @@
-import React from 'react';
+/* global ReactMeteorData */
+import React, {Component} from 'react';
+import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
 
 import Tasks from '../collections/Tasks';
 
 import './App.css';
 
-var Task = React.createClass({
-  propTypes: {
+class Task extends Component {
+  static propTypes = {
     isOwner:  React.PropTypes.bool,
     data:     React.PropTypes.shape({
       _id:      React.PropTypes.any.isRequired,
@@ -15,16 +17,16 @@ var Task = React.createClass({
       'private':React.PropTypes.bool,
       checked:  React.PropTypes.bool,
     }).isRequired,
-  },
-  onCheckedChanged(e) {
+  }
+  onCheckedChanged = (e) => {
     Meteor.call('setChecked', this.props.data._id, !!e.target.checked);
-  },
-  onDeleteClick(e) {
+  }
+  onDeleteClick = (e) => {
     Meteor.call('deleteTask', this.props.data._id);
-  },
-  onTogglePrivateClick(e) {
+  }
+  onTogglePrivateClick = (e) => {
     Meteor.call('setPrivate', this.props.data._id, !this.props.data['private']);
-  },
+  }
   render() {
     var {isOwner, data} = this.props;
     var {text, checked, username} = data;
@@ -37,11 +39,11 @@ var Task = React.createClass({
       </button>}
       <span className="text"><strong>{username}</strong> - {text}</span>
     </li>;
-  },
-});
+  }
+}
 
-export default React.createClass({
-  mixins: [ReactMeteorData],
+@reactMixin.decorate(ReactMeteorData)
+export default class App extends Component {
   getMeteorData() {
     Meteor.subscribe('tasks');
 
@@ -56,17 +58,17 @@ export default React.createClass({
       hideCompleted: hideCompleted,
       tasks:         tasks,
     };
-  },
-  onNewTaskSubmit(e) {
+  }
+  onNewTaskSubmit = (e) => {
     e.preventDefault();
 
     Meteor.call('addTask', e.target.text.value);
 
     e.target.text.value = '';
-  },
-  onHideCompletedChange(e) {
+  }
+  onHideCompletedChange = (e) => {
     Session.set('hideCompleted', !!e.target.checked);
-  },
+  }
   render() {
     var {user, hideCompleted, tasks} = this.data;
 
@@ -92,5 +94,5 @@ export default React.createClass({
         ))}
       </ul>
     </div>;
-  },
-});
+  }
+}

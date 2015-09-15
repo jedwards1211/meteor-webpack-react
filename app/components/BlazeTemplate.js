@@ -15,7 +15,7 @@ export default class BlazeTemplate extends React.Component {
   }
   componentDidMount() {
     let {template} = this.props;
-    this.view = Blaze.renderWithData(template, data, React.findDOMNode(this.refs.root));
+    this.view = Blaze.render(template, React.findDOMNode(this.refs.root));
   }
   componentWillUnmount() {
     Blaze.remove(this.view);

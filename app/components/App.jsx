@@ -1,5 +1,6 @@
 /* global ReactMeteorData */
-import React from 'react';
+import React, {Component} from 'react';
+import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts} from 'app/collections';
 import './App.css';
@@ -8,14 +9,13 @@ Meteor.call('sayHello', function(err, res) {
   console.log(res);
 });
 
-let App = React.createClass({
-  mixins: [ReactMeteorData],
-
+@reactMixin.decorate(ReactMeteorData)
+export default class App extends Component {
   getMeteorData() {
     return {
       users: Users.find().fetch()
     };
-  },
+  }
 
   render() {
     let userCount = Users.find().fetch().length;
@@ -29,6 +29,4 @@ let App = React.createClass({
       </div>
     );
   }
-});
-
-export default App;
+}

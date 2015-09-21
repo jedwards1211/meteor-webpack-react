@@ -35,20 +35,6 @@ In prod mode, `meteor_core` gets the webpack client and server bundles via the s
 
 In dev mode, both `webpack-dev-server` and `meteor_core` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor_core/client/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
 
-### If you need to use Meteor packages that depend on the `react` Meteor package
-
-This is where it gets tricky, but there is an experimental solution in the `react-commons` branch.
-
-`react-transform` requires many internal React modules, thus it doesn't work with components
-created by an instance of React loaded from `react-runtime-dev`.
-
-But if React is loaded by Webpack, then the the modules required by `react-transform`
-will be the same as in that instance of React.
-
-This poses a problem if you want to use any Meteor packages that depend on the `react` package,
-as it will load a second copy of React.  The solution is to override the `react-runtime` package
-with a local fork that exports React from a Webpack Commons Chunk.
-
 ### Windows note
 
 `meteor_core/client/client.bundle.js` is a soft link to `webpack/assets/client.bundle.js`.  

@@ -80,6 +80,7 @@ Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-
 Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
 ## Running (prod mode)
+This runs the app as if it were in production, but it's still watching your files for changes.  You can Ctrl-C after it's finished starting up and use `./met deploy`, though.
 
 ```
 > npm install

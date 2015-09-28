@@ -4,6 +4,7 @@
   "description": "A port of simple-todos to Webpack/React on the frontend",
   "repository": "https://www.github.com/jedwards1211/meteor-webpack-react",
   "devDependencies": {
+    "core-js": "^1.0.0",
     "babel": "^5.8.21",
     "babel-core": "^5.8.22",
     "babel-eslint": "^4.0.5",
@@ -36,7 +37,7 @@
     "build": "webpack/scripts/build.sh",
     "test-built": "webpack/scripts/test-built.sh",
     "lint": "eslint app",
-    "build-core-js": "grunt --gruntfile node_modules/babel-core/node_modules/core-js/Gruntfile.js build:es5,es6,es7,js,web --blacklist=es6.number.constructor --path=core-js-no-number"
+    "build-core-js": "grunt --gruntfile node_modules/core-js/Gruntfile.js build:es5,es6,es7,js,web --blacklist=es6.number.constructor --path=core-js-no-number"
   },
   "author": "",
   "license": "MIT"

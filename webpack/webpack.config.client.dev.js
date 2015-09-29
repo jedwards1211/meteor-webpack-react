@@ -15,6 +15,9 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
   output: _.assign(_.cloneDeep(config.output), {
     publicPath: devProps.baseUrl + '/assets/',
     pathinfo: true,
+    // crossOriginLoading is important since we are running 
+    // webpack-dev-server from a different port than Meteor
+    crossOriginLoading: 'anonymous',
   }),
   plugins: (config.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),

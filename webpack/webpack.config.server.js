@@ -2,7 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  target: 'node',
+  node: {
+    console: false,
+    process: false,
+  },
   entry: [
     './lib/core-js-no-number',
     'regenerator/runtime',

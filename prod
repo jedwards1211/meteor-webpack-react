@@ -10,9 +10,10 @@ WEBPACK_DIR=$SCRIPTPATH/webpack
 METEOR_DIR=$SCRIPTPATH/meteor_core
 
 [ -f $METEOR_DIR/client/loadClientBundle.html ] && rm $METEOR_DIR/client/loadClientBundle.html
+[ -f $METEOR_DIR/server/require-server-bundle.js ] && rm $METEOR_DIR/server/require-server-bundle.js
 
 cd $WEBPACK_DIR
-rm -rvf assets
+rm -rf assets
 (
   env NODE_ENV=production ../node_modules/webpack/bin/webpack.js --config webpack.config.client.prod.js --progress --colors --watch &
   env NODE_ENV=production  ../node_modules/webpack/bin/webpack.js --config webpack.config.server.prod.js --progress --colors --watch &

@@ -3,7 +3,7 @@
 cd dist
 if [ ! -d bundle ]
 then
-  tar -xvf meteor_core.tar.gz
+  tar -xf meteor_core.tar.gz
   (cd bundle/programs/server && npm install)
 fi
 cd bundle

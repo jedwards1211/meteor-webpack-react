@@ -18,7 +18,9 @@ then
   npm install
   cd "$SCRIPTPATH"
   npm run build-core-js
-  mv node_modules/core-js/core-js-no-number.js "$LIB_DIR/core-js-no-number-${CORE_JS_VERSION}.js"
+  cd node_modules/core-js
+  mv core-js-no-number.js "$LIB_DIR/core-js-no-number-${CORE_JS_VERSION}.js"
+  rm -rvf node_modules
   cd "$LIB_DIR"
   ln -sf core-js-no-number-${CORE_JS_VERSION}.js core-js-no-number.js
 else

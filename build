@@ -10,6 +10,7 @@ WEBPACK_DIR=$SCRIPTPATH/webpack
 METEOR_DIR=$SCRIPTPATH/meteor_core
 
 [ -f $METEOR_DIR/client/loadClientBundle.html ] && rm $METEOR_DIR/client/loadClientBundle.html
+[ -f $METEOR_DIR/server/require-server-bundle.js ] && rm $METEOR_DIR/server/require-server-bundle.js
 
 SERVER_BUNDLE="assets/server.bundle.js"
 CLIENT_BUNDLE="assets/client.bundle.js"
@@ -20,5 +21,5 @@ env NODE_ENV=production $SCRIPTPATH/node_modules/webpack/bin/webpack.js --config
 cd $METEOR_DIR
 ln -sf $WEBPACK_DIR/$SERVER_BUNDLE server/server.bundle.js
 ln -sf $WEBPACK_DIR/$CLIENT_BUNDLE client/client.bundle.js
-rm -rvf ../dist
+rm -rf ../dist
 METEOR_SETTINGS=$(cat ../settings/prod.json) && meteor build ../dist

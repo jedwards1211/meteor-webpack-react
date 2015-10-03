@@ -1,20 +1,25 @@
 {
   "stage": 0,
-    "plugins": [
-      "react-transform"
+  "env": {
+    // only enable it when process.env.NODE_ENV is 'development' or undefined
+    "development": {
+      "plugins": [
+        "react-transform"
       ],
-    "extra": {
-      "react-transform": [{
-        "target": "react-transform-hmr",
-        "imports": ["react"],
-        // this is important for Webpack HMR:
-        "locals": ["module"]
-      },
-      {
-        "target": "react-transform-catch-errors",
-        // the second import is the React component to render error
-        // (it can be a local path too, like "./src/ErrorReporter")
-        "imports": ["react", "redbox-react"]
-      }]
+      "extra": {
+        "react-transform": [{
+          "target": "react-transform-hmr",
+          "imports": ["react"],
+          // this is important for Webpack HMR:
+          "locals": ["module"]
+        },
+        {
+          "target": "react-transform-catch-errors",
+          // the second import is the React component to render error
+          // (it can be a local path too, like "./src/ErrorReporter")
+          "imports": ["react", "redbox-react"]
+        }]
+      }
     }
+  }
 }

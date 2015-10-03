@@ -1,8 +1,9 @@
 # meteor-webpack-react
 
-THis is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
-webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more
-convenient.
+This is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
+webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more convenient.
+
+Meteor's builtin ES6 support doesn't allow you to `import`(/`require`), but **with this project you can use all ES6 features on client and server today**, thanks to Webpack.  There are even source maps on the server thanks to https://github.com/evanw/node-source-map-support!  
 
 There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
 

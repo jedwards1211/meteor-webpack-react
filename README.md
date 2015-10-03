@@ -75,22 +75,6 @@ This runs the app as if it were in production, but it's still watching your file
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
-## Production build
-
-```
-> npm install
-> ./build
-```
-
-
-## Testing Production build
-
-(i.e. smoke testing it)
-```
-> npm install
-> ./test-built
-```
-
 
 ## Meteor Settings
 

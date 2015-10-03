@@ -76,6 +76,32 @@ This runs the app as if it were in production, but it's still watching your file
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
 
+## Deployment
+
+Big thanks to Adam Brodzinski for creating a deployment script!
+
+There is a deployment script that supports several common options:
+```
+./deploy my-app.meteor.com
+```
+The usual basic meteor.com deploy
+
+```
+./deploy modulus
+```
+Uses modulus (make sure to go into the deploy script and replace `your_app_proj_name` with a real value
+
+```
+./deploy mup
+```
+See deploy script for some additional hints
+
+```
+./deploy demeteorizer
+```
+Builds with demeteorizer
+
+
 ## Meteor Settings
 
 Put your settings in `settings/devel.json` & `settings/prod.json` and they will automatically load when running in development, production and build modes.

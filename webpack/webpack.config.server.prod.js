@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var config = module.exports = _.assign(_.cloneDeep(config), {
   plugins: (config.plugins || []).concat([
+    new webpack.BannerPlugin('var require = Npm.require;\n', {raw: true}),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),

@@ -45,7 +45,6 @@ function deploy() {
     break;
 
   case 'demeteorizer':
-    echo('Building Meteor bundle...');
     rm('-rf', 'dist/bundle');
     mkdir('-p', 'dist/bundle');
     cd(dirs.meteor);

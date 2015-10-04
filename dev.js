@@ -17,8 +17,8 @@ addProgressPlugin(serverConfig);
 addProgressPlugin(clientConfig);
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
-var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.js');
-var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.js');
+var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
+var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');
 var loadClientBundleLink = path.join(dirs.meteor, 'client/loadClientBundle.html');
 

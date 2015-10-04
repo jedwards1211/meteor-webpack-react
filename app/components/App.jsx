@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
-import {Users, Posts} from 'app/collections';
+import {Users, Posts} from 'collections';
 import './App.css';
 
 Meteor.call('sayHello', function(err, res) {

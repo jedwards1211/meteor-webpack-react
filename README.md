@@ -3,13 +3,13 @@
 This is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
 webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more convenient.
 
-Meteor's builtin ES6 support doesn't allow you to `import`(/`require`), but **with this project you can use all ES6 features on client and server today**, thanks to Webpack.  There are even source maps on the server thanks to https://github.com/evanw/node-source-map-support!  
+Meteor's builtin ES2015 support doesn't allow you to `import`(/`require`), but **with this project you can use all ES2015/ES7 features supported by Babel/corejs/regenerator on the client and server today**, thanks to Webpack.  There are even source maps on the server thanks to https://github.com/evanw/node-source-map-support!  
 
 There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
 
 ## Advantages of packaging with Webpack instead of Meteor
 
-* `require`/ES6 `import` let you avoid Meteor global variables/load order issues
+* `require`/ES2015 `import` let you avoid Meteor global variables/load order issues
 * `react-transform` reloads React components without reloading the entire page
   when you make changes
 * If you `require` your styles with Webpack, it will also reload them without
@@ -123,5 +123,5 @@ As a convenience you can run `./met` in the root directory to run the `meteor` c
 
 Thanks to:
 * @AdamBrodzinski- for a lot of contributions (esp. deployment) and promotion
-* Luigi Maselli (@grigio) - for writing the first scripts and showing me how to deal with the Meteor vs. ES6 Number polyfill issue
+* Luigi Maselli (@grigio) - for writing the first scripts and showing me how to deal with the Meteor vs. ES2015 Number polyfill issue
 * @jbbr - for presenting good workarounds for several issues

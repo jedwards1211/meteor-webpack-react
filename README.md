@@ -29,7 +29,7 @@ There is a port of the Meteor simple-todos tutorial to this stack on the `simple
 
 ## How it works
 
-The `dev`, `prod`, and `build` scripts will run Webpack, and symbolically link the generated bundles
+The `dev.js`, `prod.js`, and `deploy.js` scripts will run Webpack, and symbolically link the generated bundles
 into the `meteor_core` directory.
 
 In prod mode, `meteor_core` gets the webpack client and server bundles via the soft links `meteor_core/client/client.bundle.js` and `meteor_core/server/server.bundle.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
@@ -53,7 +53,7 @@ There have been dependency issues with old versions of Node and NPM.  Please try
 
 ```
 > npm install
-> ./dev
+> node dev.js
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
 
@@ -62,7 +62,7 @@ Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-
 ```
 > npm install -g node-inspector
 > npm install
-> ./debug
+> node debug.js
 ```
 Then visit `http://127.0.0.1:8080/debug?port=5858` in your browser.
 
@@ -71,33 +71,34 @@ This runs the app as if it were in production, but it's still watching your file
 
 ```
 > npm install
-> ./prod
+> node prod.js
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
 
 ## Deployment
 
-Big thanks to Adam Brodzinski for creating a deployment script!
+You can set the project name in `projectName.js`.  It defaults to
+the project folder name.
 
 There is a deployment script that supports several common options:
 ```
-./deploy my-app.meteor.com
+node deploy.js meteor.com
 ```
 The usual basic meteor.com deploy
 
 ```
-./deploy modulus
+node deploy.js modulus
 ```
 Uses modulus (make sure to go into the deploy script and replace `your_app_proj_name` with a real value
 
 ```
-./deploy mup
+node deploy.js mup
 ```
-See deploy script for some additional hints
+See `deploy.js` for some additional hints
 
 ```
-./deploy demeteorizer
+node deploy.js demeteorizer
 ```
 Builds with demeteorizer
 
@@ -115,3 +116,12 @@ As a convenience you can run `./met` in the root directory to run the `meteor` c
 ./met  --version
 ./met search simple-schema
 ```
+
+## Acknowledgements
+
+(if I've forgotten anyone let me know!)
+
+Thanks to:
+* @AdamBrodzinski- for a lot of contributions (esp. deployment) and promotion
+* Luigi Maselli (@grigio) - for writing the first scripts and showing me how to deal with the Meteor vs. ES6 Number polyfill issue
+* @jbbr - for presenting good workarounds for several issues

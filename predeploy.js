@@ -38,6 +38,9 @@ module.exports = function(callback) {
       return callback(err);
     }
     console.log(stats.toString(statsOptions));
+    if (stats.toJson().errors.length) {
+      return callback(new Error('Webpack reported compilation errors'));
+    }
     ln('-sf', serverBundlePath, serverBundleLink);
     compileClient();
   });
@@ -49,8 +52,10 @@ module.exports = function(callback) {
         return callback(err);
       }
       console.log(stats.toString(statsOptions));
+      if (stats.toJson().errors.length) {
+        return callback(new Error('Webpack reported compilation errors'));
+      }
       ln('-sf', clientBundlePath, clientBundleLink);
-
       return callback();
     });
   }

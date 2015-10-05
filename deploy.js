@@ -17,7 +17,7 @@ echo();
 echo('Building Webpack bundles for deployment...');
 echo();
 require('./predeploy')(function(err) {
-  if (err) return;
+  if (err) exit(1);
   deploy();
 });
 

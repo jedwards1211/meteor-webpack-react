@@ -1,10 +1,10 @@
 /* global ReactMeteorData */
-import * as React from 'react';
-import BlazeTemplate from './blaze_template';
-import { Users, Posts, IPosts } from '../collections/index';
-// import './App.css';
+import React from "react";
+import BlazeTemplate from "./blaze_template";
+import { Users, Posts, IPosts } from "../collections/index";
+// import "./App.css";
 
-Meteor.call('sayHello', function(err: Meteor.Error, res: any) {
+Meteor.call("sayHello", function(err: Meteor.Error, res: any) {
   console.log(res);
 });
 
@@ -52,6 +52,10 @@ class PostsView extends React.Component<PostsProps, PostsState> {
   }
 
   componentWillMount () {
+    // something
+  }
+
+  componentWillReceiveProps(nextProps: PostsProps) {
     // something
   }
 }

@@ -797,7 +797,7 @@ declare namespace __React {
 }
 
 declare module "react" {
-    export = __React;
+    export default __React;
 }
 
 declare module "react/addons" {

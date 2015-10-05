@@ -61,6 +61,7 @@
         "typings/react/react.d.ts",
         "typings/tsd.d.ts",
         "app/components/app.tsx",
-        "app/components/blaze_template.tsx"
+        "app/components/blaze_template.tsx",
+        "node_modules/awesome-typescript-loader/examples/tsx/index.tsx"
     ]
 }

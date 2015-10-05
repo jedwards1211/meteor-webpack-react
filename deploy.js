@@ -27,6 +27,7 @@ function deploy() {
   case 'meteor.com':
     cd(dirs.meteor);
     exec('meteor deploy ' + projectName + '.meteor.com', {async: true});
+    break;
 
   case 'modulus':
     env.METEOR_SETTINGS = cat('settings/prod.json');

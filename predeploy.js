@@ -35,6 +35,7 @@ module.exports = function(callback) {
 
   serverCompiler.run(function(err, stats) {
     if (err) {
+      console.error(error);
       return callback(err);
     }
     console.log(stats.toString(statsOptions));
@@ -49,6 +50,7 @@ module.exports = function(callback) {
     var clientCompiler = webpack(clientConfig);
     clientCompiler.run(function(err, stats) {
       if (err) {
+        console.error(error);
         return callback(err);
       }
       console.log(stats.toString(statsOptions));

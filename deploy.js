@@ -42,7 +42,7 @@ function deploy() {
      * then mup init inside settings/prod/ so that mup uses the new settings.json
      * this will require a settings path change in ./dev script
      */
-    cd(dirs.meteor);
+    cd('settings/prod');
     exec('mup deploy', {async: true});
     break;
 

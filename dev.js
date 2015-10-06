@@ -27,7 +27,7 @@ serverConfig.plugins.push(new webpack.BannerPlugin(
 ));
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
-var serverBundleRequirePath = isWin ? serverBundlePath : serverBundlePath.replace(/\\/g, '\\\\');
+var serverBundleRequirePath = isWin ? serverBundlePath.replace(/\\/g, '\\\\') : serverBundlePath;
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');

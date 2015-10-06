@@ -16,6 +16,15 @@ if (!clientConfig.devServer.stats) clientConfig.devServer.stats = statsOptions;
 addProgressPlugin(serverConfig);
 addProgressPlugin(clientConfig);
 
+serverConfig.plugins.push(new webpack.BannerPlugin(
+  'require("source-map-support/register");\n' +
+  'var Npm = Meteor.__mwrContext__.Npm;\n' +
+  'var Assets = Meteor.__mwrContext__.Assets;\n' +
+  'delete Meteor.__mwrContext__;\n' +
+  'var require = Npm.require;\n',
+  {raw: true}
+));
+
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
@@ -38,7 +47,8 @@ serverCompiler.watch({
 }, function(err, stats) {
   console.log(stats.toString(statsOptions)) ;
   var jsonStats = stats.toJson({hash: true});
-  ('//' + jsonStats.hash + '\n' +
+  ('//' + jsonStats.hash + '\n' + 
+   'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +
    'Npm.require("' + serverBundlePath + '");').to(requireServerBundleJs);
 
   if (!serverBundleReady) {

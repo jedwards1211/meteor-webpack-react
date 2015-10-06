@@ -16,6 +16,8 @@ var clientConfig = require(path.join(dirs.webpack, 'webpack.config.client.prod')
 addProgressPlugin(serverConfig);
 addProgressPlugin(clientConfig);
 
+serverConfig.plugins.push(new webpack.BannerPlugin('var require = Npm.require;\n', {raw: true}));
+
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
 var clientBundlePath = path.join(dirs.assets, 'client.bundle.js');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');

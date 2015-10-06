@@ -27,6 +27,7 @@ serverConfig.plugins.push(new webpack.BannerPlugin(
 ));
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
+var serverBundleRequirePath = isWin ? serverBundlePath : serverBundlePath.replace(/\\/g, '\\\\');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');
@@ -70,12 +71,8 @@ function runMeteor() {
 
 function updateRequireServerBundleJs(stats) {
   console.log(stats.toString(statsOptions)) ;
-  var requirePath = serverBundlePath;
-  if (isWin) {
-    requirePath = requirePath.replace(/\\/g, '\\\\');
-  }
   var jsonStats = stats.toJson({hash: true});
   ('//' + jsonStats.hash + '\n' +
   'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +
-  'Npm.require("' + requirePath + '");').to(requireServerBundleJs);
+  'Npm.require("' + serverBundleRequirePath + '");').to(requireServerBundleJs);
 }

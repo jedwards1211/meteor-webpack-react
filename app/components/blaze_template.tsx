@@ -1,15 +1,15 @@
 /* global Blaze */
-import React from 'react';
+import * as React from 'react';
 
 export default React.createClass({
   propTypes: {
     template: React.PropTypes.any.isRequired,
-    component: React.PropTypes.any,
+    //component: React.PropTypes.any,
   },
 
   getDefaultProps() {
     return {
-      component: 'div',
+      template: null,
     };
   },
 
@@ -27,8 +27,8 @@ export default React.createClass({
   },
 
   render() {
-    let {component, ...props} = this.props;
-    props.ref = 'root';
-    return React.createElement(component, props);
+    // let component = this.props.component;
+    let props = this.props;
+    return <span ref="root" {...props} />; // desctructuring in typescript does not work well
   },
 });

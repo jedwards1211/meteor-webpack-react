@@ -7,7 +7,4 @@ var config = module.exports = _.assign(_.cloneDeep(config), {
   output: _.assign(_.cloneDeep(config.output), {
     pathinfo: true,
   }),
-  plugins: (config.plugins || []).concat([
-    new webpack.BannerPlugin('require("source-map-support/register");\n', {raw: true}),
-  ]),
 });

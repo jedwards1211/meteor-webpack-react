@@ -2,9 +2,7 @@
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
-
 import Tasks from '../collections/Tasks';
-
 import './App.css';
 
 class Task extends Component {

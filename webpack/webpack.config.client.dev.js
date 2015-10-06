@@ -3,13 +3,13 @@ var config = require('./webpack.config.client');
 var _ = require('lodash');
 var devProps = require('./devProps');
 
-var config = module.exports = _.assign(_.cloneDeep(config), {
+var config = module.exports = _.assign(_.clone(config), {
   devtool: 'eval',
   entry: [
     'webpack-dev-server/client?' + devProps.baseUrl,
     'webpack/hot/only-dev-server',
   ].concat(config.entry),
-  output: _.assign(_.cloneDeep(config.output), {
+  output: _.assign(_.clone(config.output), {
     publicPath: devProps.baseUrl + '/assets/',
     pathinfo: true,
     // crossOriginLoading is important since we are running 

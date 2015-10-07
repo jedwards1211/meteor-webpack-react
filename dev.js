@@ -1,6 +1,5 @@
 require('shelljs/global');
 var fs = require('fs');
-var isWin = ('win32' === require('os').platform());
 var path = require('path');
 var dirs = require('./dirs');
 var webpack = require('webpack');
@@ -27,7 +26,7 @@ serverConfig.plugins.push(new webpack.BannerPlugin(
 ));
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
-var serverBundleRequirePath = isWin ? serverBundlePath.replace(/\\/g, '\\\\') : serverBundlePath;
+var serverBundleRequirePath = serverBundlePath.replace(/\\/g, '\\\\');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');

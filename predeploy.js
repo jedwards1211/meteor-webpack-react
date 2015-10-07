@@ -24,11 +24,11 @@ var loadClientBundleLink = path.join(dirs.meteor, 'client/loadClientBundle.html'
 var requireServerBundleJs = path.join(dirs.meteor, 'server/require.server.bundle.js');
 
 module.exports = function(callback) {
+  require('./core-js-custom-build');
+
   if (!process.env.NODE_ENV) {
     process.env.NODE_ENV = env.NODE_ENV = 'production';
   }
-
-  require('./core-js-custom-build');
 
   if (fs.existsSync(loadClientBundleLink)) rm(loadClientBundleLink);
   if (fs.existsSync(requireServerBundleJs)) rm(requireServerBundleJs);

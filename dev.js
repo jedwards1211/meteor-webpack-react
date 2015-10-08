@@ -26,6 +26,7 @@ serverConfig.plugins.push(new webpack.BannerPlugin(
 ));
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
+var serverBundleRequirePath = serverBundlePath.replace(/\\/g, '\\\\');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');
@@ -46,11 +47,7 @@ serverCompiler.watch({
   colors: true,
 }, function(err, stats) {
   console.log(stats.toString(statsOptions)) ;
-  var jsonStats = stats.toJson({hash: true});
-  ('//' + jsonStats.hash + '\n' + 
-   'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +
-   'Npm.require("' + serverBundlePath + '");').to(requireServerBundleJs);
-
+  updateRequireServerBundleJs(stats);
   if (!serverBundleReady) {
     serverBundleReady = true;
     compileClient();
@@ -70,4 +67,11 @@ function compileClient() {
 function runMeteor() {
   cd(dirs.meteor);
   exec('meteor --settings ../settings/devel.json', {async: true});
+}
+
+function updateRequireServerBundleJs(stats) {
+  var jsonStats = stats.toJson({hash: true});
+  ('//' + jsonStats.hash + '\n' +
+  'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +
+  'Npm.require("' + serverBundleRequirePath + '");').to(requireServerBundleJs);
 }

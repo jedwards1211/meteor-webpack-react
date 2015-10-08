@@ -12,9 +12,6 @@ var config = module.exports = _.assign(_.clone(config), {
   output: _.assign(_.clone(config.output), {
     publicPath: devProps.baseUrl + '/assets/',
     pathinfo: true,
-    // crossOriginLoading is important since we are running 
-    // webpack-dev-server from a different port than Meteor
-    crossOriginLoading: 'anonymous',
   }),
   plugins: (config.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),
@@ -27,5 +24,12 @@ var config = module.exports = _.assign(_.clone(config), {
     historyApiFallback: true,
     contentBase: devProps.contentBase,
     port: devProps.webpackPort,
+    // proxy: {
+      // '/sockjs/*': {
+      //   ws: true,
+      //   target: 'ws://localhost:3000/sockjs',
+      // },
+      // '*': 'http://localhost:3000',
+    // }
   }
 });

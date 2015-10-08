@@ -5,6 +5,10 @@ import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts} from 'collections';
 import './App.css';
 
+import 'react/addons';
+
+import name from './data';
+
 Meteor.call('sayHello', function(err, res) {
   console.log(res);
 });
@@ -18,6 +22,8 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(name);
+
     let userCount = Users.find().fetch().length;
     let postsCount = Posts.find().fetch().length;
     return (

@@ -16,15 +16,17 @@
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "node-libs-browser": "^0.5.2",
+    "react-tools": "^0.10.0",
+    "react-transform": "0.0.3",
     "react-transform-catch-errors": "^1.0.0",
-    "react-transform-hmr": "^1.0.0",
-    "redbox-react": "^1.0.1",
+    "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.1.1",
     "regenerator": "^0.8.36",
     "shelljs": "^0.5.3",
     "source-map-support": "^0.3.2",
     "style-loader": "^0.12.3",
-    "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.10.1"
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
     "classnames": "^2.1.3",

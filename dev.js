@@ -46,6 +46,7 @@ serverCompiler.watch({
   progress: true,
   colors: true,
 }, function(err, stats) {
+  console.log(stats.toString(statsOptions)) ;
   updateRequireServerBundleJs(stats);
   if (!serverBundleReady) {
     serverBundleReady = true;
@@ -69,7 +70,6 @@ function runMeteor() {
 }
 
 function updateRequireServerBundleJs(stats) {
-  console.log(stats.toString(statsOptions)) ;
   var jsonStats = stats.toJson({hash: true});
   ('//' + jsonStats.hash + '\n' +
   'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +

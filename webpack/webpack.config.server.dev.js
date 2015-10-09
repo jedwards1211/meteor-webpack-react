@@ -15,7 +15,7 @@ var config = module.exports = _.assign(_.clone(config), {
       meteor: dirs.meteor,
       key: 'server',
       target: 'server',
-      mode: 'dev',
+      mode: 'development',
     }),
   ]),
 });

@@ -15,6 +15,11 @@
     "eslint-plugin-react": "^3.2.2",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
+    "karma": "^0.13.9",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-jasmine": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-webpack": "^1.7.0",
     "node-libs-browser": "^0.5.2",
     "react-tools": "^0.10.0",
     "react-transform": "0.0.3",
@@ -26,7 +31,8 @@
     "source-map-support": "^0.3.2",
     "style-loader": "^0.12.3",
     "webpack": "^1.12.0",
-    "webpack-dev-server": "^1.12.0"
+    "webpack-dev-server": "^1.12.0",
+    "webpack-meteor-tools": "git://github.com/mindfront/webpack-meteor-tools.git"
   },
   "dependencies": {
     "classnames": "^2.1.3",

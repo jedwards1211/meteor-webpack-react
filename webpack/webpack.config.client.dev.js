@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var config = require('./webpack.config.client');
 var _ = require('lodash');
 var devProps = require('./devProps');
+var RunInMeteorPlugin = require('webpack-meteor-tools/lib/RunInMeteorPlugin');
+var dirs = require('../dirs');
 
 var config = module.exports = _.assign(_.clone(config), {
   devtool: 'eval',
@@ -19,6 +21,12 @@ var config = module.exports = _.assign(_.clone(config), {
   plugins: (config.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new RunInMeteorPlugin({
+      mode: 'development', 
+      target: 'client', 
+      meteor: dirs.meteor,
+      key: 'client',
+    }),
   ]),
   devServer: {
     publicPath: devProps.baseUrl + '/assets/',

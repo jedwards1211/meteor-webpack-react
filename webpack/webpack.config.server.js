@@ -25,6 +25,10 @@ module.exports = {
         loader: 'babel?stage=0',
         exclude: /node_modules|lib/,
       },
+      {
+        test: /\.css$/,
+        loader: 'null-loader'
+      },
     ],
   },
 };

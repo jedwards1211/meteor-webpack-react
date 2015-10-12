@@ -1,5 +1,6 @@
 /* global Blaze */
 import React, {component} from 'react';
+import ReactDOM from 'react-dom';
 
 export default class BlazeTemplate extends React.Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export default class BlazeTemplate extends React.Component {
   }
   componentDidMount() {
     let {template} = this.props;
-    this.view = Blaze.render(template, React.findDOMNode(this.refs.root));
+    this.view = Blaze.render(template, ReactDOM.findDOMNode(this.refs.root));
   }
   componentWillUnmount() {
     Blaze.remove(this.view);

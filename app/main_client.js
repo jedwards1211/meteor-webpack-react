@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 
 Accounts.ui.config({
@@ -8,5 +9,5 @@ Accounts.ui.config({
 console.log('Running on client only');
 
 Meteor.startup(() => {
-  React.render(<App/>, document.getElementById('root'));
+  ReactDOM.render(<App/>, document.getElementById('root'));
 });

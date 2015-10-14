@@ -15,5 +15,7 @@ Npm.require;
 Assets;
 require('fs').readFile.call;
 
+console.error(new Error('source map test').stack);
+
 console.log('\n\nRunning on server only');
 console.log('There are # posts:', Posts.find().fetch().length);

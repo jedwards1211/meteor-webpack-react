@@ -32,7 +32,7 @@
     "style-loader": "^0.12.3",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.12.0",
-    "webpack-meteor-tools": "git://github.com/mindfront/webpack-meteor-tools.git"
+    "webpack-meteor-tools": "git://github.com/mindfront/webpack-meteor-tools.git#843f5a4b30c6bf268bb0fd1d2add7abcb60dabf9"
   },
   "dependencies": {
     "classnames": "^2.1.3",

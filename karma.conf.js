@@ -23,7 +23,7 @@ module.exports = function (config) {
     // use our own webpack config to mirror test setup
     webpack: {
       entry: [
-        './lib/core-js-no-number',
+        './webpack/lib/core-js-no-number',
         'regenerator/runtime',
       ],
       devtool: 'eval-source-map',

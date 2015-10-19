@@ -24,7 +24,7 @@ var loadClientBundleLink = path.join(dirs.meteor, 'client/loadClientBundle.html'
 var requireServerBundleJs = path.join(dirs.meteor, 'server/require.server.bundle.js');
 
 module.exports = function(callback) {
-  require('./core-js-custom-build');
+  exec('node core-js-custom-build.js');
 
   if (!process.env.NODE_ENV) {
     process.env.NODE_ENV = env.NODE_ENV = 'production';

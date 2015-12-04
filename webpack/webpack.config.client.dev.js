@@ -64,5 +64,10 @@ var config = module.exports = _.assign(_.clone(config), {
     historyApiFallback: true,
     contentBase: devProps.contentBase,
     port: devProps.webpackPort,
+    stats: {
+      colors: true,
+      chunkModules: false,
+      modules: false,
+    },
   }
 });

@@ -8,7 +8,8 @@
 import React from 'react/addons';
 //import App from '../App';
 //import $ from 'jquery'; // you could use jq to make life easier
-const TestUtils = React.addons.TestUtils;
+import TestUtils from 'react-addons-test-utils';
+
 const Simulate = TestUtils.Simulate;
 
 // these should go into a spec helper module

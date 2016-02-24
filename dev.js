@@ -4,35 +4,21 @@ var path = require('path');
 var dirs = require('./dirs');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var addProgressPlugin = require('./addProgressPlugin');
 var statsOptions = require('./statsOptions');
 
-var serverConfig = require(path.join(dirs.webpack, 'webpack.config.server.dev'));
-var clientConfig = require(path.join(dirs.webpack, 'webpack.config.client.dev'));
+var makeConfig = require(path.join(dirs.webpack, 'make-webpack-config'));
+
+var serverConfig = makeConfig({target: 'server', mode: 'dev'});
+var clientConfig = makeConfig({target: 'client', mode: 'dev'});
 
 if (!clientConfig.devServer) clientConfig.devServer = {};
 if (!clientConfig.devServer.stats) clientConfig.devServer.stats = statsOptions;
 
-addProgressPlugin(serverConfig);
-addProgressPlugin(clientConfig);
-
-serverConfig.plugins.push(new webpack.BannerPlugin(
-  'require("source-map-support/register");\n' +
-  'var Npm = Meteor.__mwrContext__.Npm;\n' +
-  'var Assets = Meteor.__mwrContext__.Assets;\n' +
-  'delete Meteor.__mwrContext__;\n' +
-  'var require = Npm.require;\n',
-  {raw: true}
-));
-
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
-var serverBundleRequirePath = serverBundlePath.replace(/\\/g, '\\\\');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
 var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');
 var loadClientBundleLink = path.join(dirs.meteor, 'client/loadClientBundle.html');
-
-var requireServerBundleJs = path.join(dirs.meteor, 'server/require.server.bundle.js');
 
 exec('node core-js-custom-build.js');
 
@@ -47,7 +33,7 @@ serverCompiler.watch({
   colors: true,
 }, function(err, stats) {
   console.log(stats.toString(statsOptions)) ;
-  updateRequireServerBundleJs(stats);
+  ln('-sf', serverBundlePath, serverBundleLink)
   if (!serverBundleReady) {
     serverBundleReady = true;
     compileClient();
@@ -67,11 +53,4 @@ function compileClient() {
 function runMeteor() {
   cd(dirs.meteor);
   exec('meteor --settings ../settings/devel.json', {async: true});
-}
-
-function updateRequireServerBundleJs(stats) {
-  var jsonStats = stats.toJson({hash: true});
-  ('//' + jsonStats.hash + '\n' +
-  'Meteor.__mwrContext__ = {Npm: Npm, Assets: Assets};\n' +
-  'Npm.require("' + serverBundleRequirePath + '");').to(requireServerBundleJs);
 }

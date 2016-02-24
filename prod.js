@@ -7,29 +7,23 @@ var fs = require('fs');
 var path = require('path');
 var dirs = require('./dirs');
 var webpack = require('webpack');
-var addProgressPlugin = require('./addProgressPlugin');
 var statsOptions = require('./statsOptions');
 
-var serverConfig = require(path.join(dirs.webpack, 'webpack.config.server.prod'));
-var clientConfig = require(path.join(dirs.webpack, 'webpack.config.client.prod'));
+var makeConfig = require(path.join(dirs.webpack, 'make-webpack-config'));
 
-addProgressPlugin(serverConfig);
-addProgressPlugin(clientConfig);
-
-serverConfig.plugins.push(new webpack.BannerPlugin('var require = Npm.require;\n', {raw: true}));
+var serverConfig = makeConfig({target: 'server', mode: 'production'});
+var clientConfig = makeConfig({target: 'client', mode: 'production'});
 
 var serverBundlePath = path.join(dirs.assets, 'server.bundle.js');
 var clientBundlePath = path.join(dirs.assets, 'client.bundle.js');
 var serverBundleLink = path.join(dirs.meteor, 'server/server.bundle.min.js');
 var clientBundleLink = path.join(dirs.meteor, 'client/client.bundle.min.js');
-var loadClientBundleHtml = path.join(dirs.webpack, 'loadClientBundle.html');
 var loadClientBundleLink = path.join(dirs.meteor, 'client/loadClientBundle.html');
-var requireServerBundleJs = path.join(dirs.meteor, 'server/require.server.bundle.js');
 
 exec('node core-js-custom-build.js');
 
 if (fs.existsSync(loadClientBundleLink)) rm(loadClientBundleLink);
-if (fs.existsSync(requireServerBundleJs)) rm(requireServerBundleJs);
+if (fs.existsSync(serverBundleLink)) rm(serverBundleLink);
 
 var serverCompiler = webpack(serverConfig);
 var serverBundleReady = false;

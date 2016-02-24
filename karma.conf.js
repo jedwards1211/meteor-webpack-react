@@ -1,5 +1,6 @@
 var path = require('path');
-var webpackConfig = require('./webpack/webpack.config.client.js');
+
+process.env.NODE_ENV = 'production';
 
 module.exports = function (config) {
   config.set({
@@ -21,15 +22,11 @@ module.exports = function (config) {
       './test/karma.bundle.js': [ 'webpack', 'sourcemap' ]
     },
     // use our own webpack config to mirror test setup
-    webpack: {
-      entry: [
-        './webpack/lib/core-js-no-number',
-        'regenerator/runtime',
-      ],
-      devtool: 'eval-source-map',
-      resolve: webpackConfig.resolve,
-      module: { loaders: webpackConfig.module.loaders },
-    },
+    webpack: require('./webpack/make-webpack-config')({
+      target: 'client',
+      mode: 'production',
+      karma: true,
+    }),
     webpackMiddleware: {
       noInfo: true,
     }

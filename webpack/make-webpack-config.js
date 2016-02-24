@@ -144,7 +144,6 @@ module.exports = function(options) {
 
   if (target === 'server') {
     config = merge({
-      target: 'node',
       entry: [ '../app/main_server' ],
       output: {
         filename: 'server.bundle.js'

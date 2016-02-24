@@ -76,6 +76,12 @@ This runs the app as if it were in production, but it's still watching your file
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
 
 
+## Karma testing
+
+```
+> npm run karma
+```
+
 ## Deployment
 
 You can set the project name in `projectName.js`.  It defaults to

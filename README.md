@@ -83,6 +83,11 @@ Then visit http://localhost:3000 in your browser.
 > npm run karma
 ```
 
+Any `.js` or `.jsx` files in `app/**/__tests__/client/unit` will be run in Karma.
+See https://github.com/jedwards1211/meteor-webpack-react/blob/master/app/components/__tests__/client/unit/AppSpec.js for an example.
+
+[enzyme](https://github.com/airbnb/enzyme) support is also included!
+
 ## Deployment
 
 You can set the project name in `projectName.js`.  It defaults to

@@ -88,10 +88,12 @@ module.exports = function(options) {
 
     if (mode === 'dev') {
       var devProps = require('./devProps');
+      var baseUrl = 'http://' + devProps.host + ':' + devProps.webpackPort;
+      var contentBase = 'http://' + devProps.host + ':' + devProps.meteorPort;
 
       config = merge.smart({
         entry: [
-          'webpack-dev-server/client?' + devProps.baseUrl,
+          'webpack-dev-server/client?' + baseUrl,
           'webpack/hot/only-dev-server'
         ],
         plugins: [
@@ -103,7 +105,7 @@ module.exports = function(options) {
       config = merge.smart(config, {
         devtool: 'eval',
         output: {
-          publicPath: devProps.baseUrl + '/'
+          publicPath: baseUrl + '/'
         },
         module: {
           loaders: [
@@ -132,13 +134,20 @@ module.exports = function(options) {
           ]
         },
         devServer: {
-          publicPath: devProps.baseUrl + '/',
+          publicPath: baseUrl + '/',
           host: devProps.host,
           hot: true,
           historyApiFallback: true,
-          contentBase: devProps.contentBase,
+          contentBase: contentBase,
           port: devProps.webpackPort,
-          stats: require('../statsOptions')
+          stats: require('../statsOptions'),
+          proxy: {
+            '*': contentBase,
+            '/sockjs/*': {
+              target: contentBase,
+              ws: true
+            }
+          }
         }
       });
     }

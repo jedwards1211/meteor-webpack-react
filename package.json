@@ -37,7 +37,7 @@
     "source-map-support": "^0.4.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.10.1",
+    "webpack-dev-server": "git+https://github.com/jedwards1211/webpack-dev-server#ec658699d413407fb12025c59c768221bb05ab0c",
     "webpack-merge": "^0.8.3"
   },
   "dependencies": {

@@ -7,12 +7,19 @@ var babelMerge = require('./babel-merge');
 
 module.exports = function(options) {
   var argv = require('minimist')(process.argv.slice(2));
-  options = _.assign({}, options, argv);
+  options = _.assign({}, require('./devProps'), options, argv);
 
   var target = options.target;
   var mode = options.mode || process.env.NODE_ENV || 'dev';
   if (mode === 'development') mode = 'dev';
   if (mode === 'production') mode = 'prod';
+  var karma = options.karma;
+  var host = options.host;
+  var webpackPort = options.webpackPort;
+  var meteorPort = options.meteorPort;
+  var baseUrl = 'http://' + host + ':' + webpackPort;
+  var contentBase = 'http://' + host + ':' + meteorPort;
+  var entry = options.entry || ['../app/main_' + target];
 
   ////////////////////////////////////////////////////////////////////////////////
   // BASE
@@ -36,7 +43,7 @@ module.exports = function(options) {
       pathinfo: true
     },
     resolve: {
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['', '.js', '.jsx', '.json'],
       root: path.join(__dirname, '../app')
     },
     module: {
@@ -60,7 +67,6 @@ module.exports = function(options) {
 
   if (target === 'client') {
     config = merge(config, {
-      entry: [ '../app/main_client' ],
       output: {
         filename: 'client.bundle.js'
       },
@@ -69,7 +75,8 @@ module.exports = function(options) {
           {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
-          }
+          },
+          { test: /\.json$/, loader: 'json-loader' }
         ]
       },
       plugins: [
@@ -87,10 +94,6 @@ module.exports = function(options) {
     ////////////////////////////////////////////////////////////////////////////////
 
     if (mode === 'dev') {
-      var devProps = require('./devProps');
-      var baseUrl = 'http://' + devProps.host + ':' + devProps.webpackPort;
-      var contentBase = 'http://' + devProps.host + ':' + devProps.meteorPort;
-
       config = merge.smart({
         entry: [
           'webpack-dev-server/client?' + baseUrl,
@@ -135,11 +138,11 @@ module.exports = function(options) {
         },
         devServer: {
           publicPath: baseUrl + '/',
-          host: devProps.host,
+          host: host,
           hot: true,
           historyApiFallback: true,
           contentBase: contentBase,
-          port: devProps.webpackPort,
+          port: webpackPort,
           stats: require('../statsOptions'),
           proxy: {
             '*': contentBase,
@@ -182,7 +185,6 @@ module.exports = function(options) {
 
   if (target === 'server') {
     config = merge(config, {
-      entry: [ '../app/main_server' ],
       output: {
         filename: 'server.bundle.js'
       },
@@ -241,9 +243,29 @@ module.exports = function(options) {
   // KARMA
   ////////////////////////////////////////////////////////////////////////////////
 
-  if (options.karma) {
-   config = merge(config, {
-      devtool: 'eval-source-map'
+  if (karma) {
+    config = merge(config, {
+      devtool: 'eval-source-map',
+      externals: {
+        jsdom: 'window'
+      },
+      plugins: [
+        new webpack.IgnorePlugin(/react\/lib\/(ReactContext|ExecutionEnvironment)/)
+      ],
+      devServer: {
+        port: webpackPort,
+        stats: require('../statsOptions'),
+      }
+    });
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // ENTRY
+  ////////////////////////////////////////////////////////////////////////////////
+
+  if (entry) {
+    config = merge(config, {
+      entry: entry 
     });
   }
 

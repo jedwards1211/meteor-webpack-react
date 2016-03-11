@@ -56,6 +56,7 @@ There have been dependency issues with old versions of Node and NPM.  Please try
 > node dev.js
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
+Then visit http://localhost:9090 in your browser.
 
 ## Debugging/Profiling Server (dev mode)
 
@@ -74,7 +75,7 @@ This runs the app as if it were in production, but it's still watching your file
 > node prod.js
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
-
+Then visit http://localhost:3000 in your browser.
 
 ## Karma testing
 

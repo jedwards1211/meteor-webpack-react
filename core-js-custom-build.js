@@ -2,7 +2,6 @@ require('shelljs/global');
 var dirs = require('./dirs');
 var fs = require('fs');
 var path = require('path');
-var coreJsBuild = require('core-js/build');
 
 dirs.lib = path.join(dirs.webpack, 'lib');
 if (!fs.existsSync(dirs.lib)) mkdir(dirs.lib);
@@ -18,15 +17,13 @@ var currentFileVersion = currentFileVersionRegex.test(currentFileFewLines) ?
 
 if (coreJsVersion !== currentFileVersion) {
   echo('Building core-js@' + coreJsVersion + ' without ES6 number constructor...');
-  coreJsBuild({
-    modules: ['es5', 'es6', 'es7', 'js', 'web'],
+  require('core-js-builder')({
+    modules: ['es5', 'es6', 'es7', 'core.dict', 'web'],
     blacklist: ['es6.number.constructor'],
-  }, function(error, code) {
-    if (error) {
-      console.error('core-js build error');
-      return;
-    }
+  }).then(function(code) {
     fs.writeFileSync(path.join(dirs.lib, targetFileName), code);
+  }).catch(function(error) {
+    console.error('core-js build error');
   });
 }
 else {

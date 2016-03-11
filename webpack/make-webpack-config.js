@@ -2,15 +2,27 @@ var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+var _ = require('lodash');
+var babelMerge = require('./babel-merge');
 
 module.exports = function(options) {
-  options = options || {};
-  var target = options.target || process.env.TARGET;
-  var mode = options.mode || options.env || options.NODE_ENV || process.env.NODE_ENV || 'dev';
+  var argv = require('minimist')(process.argv.slice(2));
+  options = _.assign({}, options, argv);
+
+  var target = options.target;
+  var mode = options.mode || process.env.NODE_ENV || 'dev';
+  if (mode === 'development') mode = 'dev';
+  if (mode === 'production') mode = 'prod';
 
   ////////////////////////////////////////////////////////////////////////////////
   // BASE
   ////////////////////////////////////////////////////////////////////////////////
+
+  var babelQueryBase = {
+    presets: ["es2015", "stage-1", "react"],
+    plugins: ["transform-decorators-legacy"],
+    cacheDirectory: true
+  };
 
   var config = {
     context: __dirname,
@@ -33,15 +45,12 @@ module.exports = function(options) {
           test: /\.jsx?$/,
           loader: 'babel',
           exclude: /node_modules|lib/,
-          query: {
-            cacheDirectory: true,
-            stage: 0
-          }
+          query: babelQueryBase
         }
       ]
     },
     plugins: [
-      new ProgressBarPlugin(),
+      new ProgressBarPlugin()
     ]
   };
 
@@ -50,7 +59,7 @@ module.exports = function(options) {
   ////////////////////////////////////////////////////////////////////////////////
 
   if (target === 'client') {
-    config = merge({
+    config = merge(config, {
       entry: [ '../app/main_client' ],
       output: {
         filename: 'client.bundle.js'
@@ -71,23 +80,30 @@ module.exports = function(options) {
         new webpack.PrefetchPlugin("react"),
         new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment")
       ]
-    }, config);
+    });
 
     ////////////////////////////////////////////////////////////////////////////////
     // CLIENT DEVELOPMENT
     ////////////////////////////////////////////////////////////////////////////////
 
-    if (mode === 'dev' || mode === 'development') {
+    if (mode === 'dev') {
       var devProps = require('./devProps');
 
-      config = merge.smart(config, {
-        devtool: 'eval',
+      config = merge.smart({
         entry: [
           'webpack-dev-server/client?' + devProps.baseUrl,
           'webpack/hot/only-dev-server'
         ],
+        plugins: [
+          new webpack.HotModuleReplacementPlugin(),
+          new webpack.NoErrorsPlugin()
+        ]
+      }, config);
+
+      config = merge.smart(config, {
+        devtool: 'eval',
         output: {
-          publicPath: devProps.baseUrl + '/',
+          publicPath: devProps.baseUrl + '/'
         },
         module: {
           loaders: [
@@ -95,36 +111,26 @@ module.exports = function(options) {
               test: /\.jsx?$/,
               loader: 'babel',
               exclude: /node_modules|lib/,
-              query: {
-                cacheDirectory: true,
-                "stage": 0,
+              query: babelMerge(babelQueryBase, {
                 "plugins": [
-                  "react-transform"
-                ],
-                "extra": {
-                  "react-transform": {
-                    "transforms": [{
-                      "transform": "react-transform-hmr",
-                      "imports": ["react"],
-                      // this is important for Webpack HMR:
-                      "locals": ["module"]
-                    },
-                    {
-                      "transform": "react-transform-catch-errors",
-                      // the second import is the React component to render error
-                      // (it can be a local path too, like './src/ErrorReporter')
-                      "imports": ["react", "redbox-react"]
-                    }]
-                  }
-                }
-              }
+                  ["react-transform", {
+                    "transforms": [
+                      {
+                        "transform": "react-transform-hmr",
+                        "imports": ["react"],
+                        "locals": ["module"]
+                      },
+                      {
+                        "transform": "react-transform-catch-errors",
+                        "imports": ["react", "redbox-react"]
+                      }
+                    ]
+                  }]
+                ]
+              })
             }
           ]
         },
-        plugins: [
-          new webpack.HotModuleReplacementPlugin(),
-          new webpack.NoErrorsPlugin()
-        ],
         devServer: {
           publicPath: devProps.baseUrl + '/',
           host: devProps.host,
@@ -136,6 +142,29 @@ module.exports = function(options) {
         }
       });
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // CLIENT PRODUCTION
+    ////////////////////////////////////////////////////////////////////////////////
+
+    if (mode === 'prod') {
+      config = merge.smart(config, {
+        module: {
+          loaders: [
+            {
+              test: /\.jsx?$/,
+              loader: 'babel',
+              exclude: /node_modules|lib/,
+              query: babelMerge(babelQueryBase, {
+                "plugins": [
+                  "transform-react-constant-elements",
+                ],
+              })
+            }
+          ]
+        }
+      });
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +172,7 @@ module.exports = function(options) {
   ////////////////////////////////////////////////////////////////////////////////
 
   if (target === 'server') {
-    config = merge({
+    config = merge(config, {
       entry: [ '../app/main_server' ],
       output: {
         filename: 'server.bundle.js'
@@ -162,13 +191,13 @@ module.exports = function(options) {
           'Meteor.isServer': true
         })
       ]
-    }, config);
+    });
 
     ////////////////////////////////////////////////////////////////////////////////
     // SERVER DEVELOPMENT
     ////////////////////////////////////////////////////////////////////////////////
 
-    if (mode === 'dev' || mode === 'development') {
+    if (mode === 'dev') {
       config = merge(config, {
         devtool: 'source-map'
       });
@@ -179,7 +208,7 @@ module.exports = function(options) {
   // PRODUCTION
   ////////////////////////////////////////////////////////////////////////////////
 
-  if (mode === 'prod' || mode === 'production') {
+  if (mode === 'prod') {
     config = merge(config, {
       output: {
         pathinfo: false
@@ -209,7 +238,7 @@ module.exports = function(options) {
     });
   }
 
-  if (process.argv.indexOf('--print-webpack-config') >= 0) {
+  if (argv['print-webpack-config']) {
     console.log('================================================================');
     console.log('Webpack config for: ' + JSON.stringify(options, null, 2));
     console.log('================================================================\n');

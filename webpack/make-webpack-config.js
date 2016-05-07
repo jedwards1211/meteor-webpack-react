@@ -27,6 +27,8 @@ module.exports = function(options) {
   
   if      (mode === 'dev')  mode = 'development'
   else if (mode === 'prod') mode = 'production'
+  
+  var useDevServer = options.useDevServer || false
 
   var uglify      = options.uglify != null ? options.uglify : mode === 'production' && target === 'client'
   var host        = options.host         || '0.0.0.0'
@@ -137,7 +139,7 @@ module.exports = function(options) {
     // CLIENT DEVELOPMENT
     ////////////////////////////////////////////////////////////////////////////////
 
-    if (mode === 'development') {
+    if (mode === 'development' || useDevServer) {
       config = merge.smart({
         entry: [
           'webpack-dev-server/client?' + baseUrl,

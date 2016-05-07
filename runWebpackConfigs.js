@@ -1,14 +1,20 @@
-var fs = require('fs');
-var path = require('path');
-var dirs = require('./dirs');
-var runWebpackConfigs = require('webpack-meteor-tools/lib/runWebpackConfigs');
+var _ = require('lodash')
+var runWebpackConfigs = require('webpack-meteor-tools/lib/runWebpackConfigs')
+var webpack = require('webpack')
+var webpackDevServer = require('webpack-dev-server')
 
-module.exports = function(mode, callback) {
-  var modeRx = new RegExp('\\.' + mode + '\\.js$');
-  var configs = fs.readdirSync(dirs.webpack)
-    .filter(modeRx.test.bind(modeRx))
-    .map(function(file) {
-      return require(path.join(dirs.webpack, file));
-    });
-  return runWebpackConfigs(configs, callback);
-};
+var makeWebpackConfig = require('./webpack/make-webpack-config')
+
+module.exports = function(options, callback) {
+  return runWebpackConfigs([
+    makeWebpackConfig(_.assign({}, options, {
+      target: 'client'
+    })),
+    makeWebpackConfig(_.assign({}, options, {
+      target: 'server'
+    }))
+  ], {
+    webpack: webpack,
+    webpackDevServer: webpackDevServer
+  }, callback)
+}

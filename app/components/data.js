@@ -1,1 +1,1 @@
-module.exports = 'andy';
+module.exports = 'andy'

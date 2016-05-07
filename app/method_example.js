@@ -6,6 +6,6 @@
 
 Meteor.methods({
   sayHello() {
-    return 'Hello from Meteor method!';
+    return 'Hello from Meteor method!'
   },
-});
+})

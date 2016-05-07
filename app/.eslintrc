@@ -1,6 +1,26 @@
 {
-  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "commonjs": true,
+    "meteor": true,
+    "es6": true
+  },
   "rules": {
-    "prefer-const": 0
-  }
+    "comma-dangle": 0,
+    "no-console": 1,
+    "no-unused-vars": [1, {"args": "none", "varsIgnorePattern": "React"}],
+    "react/react-in-jsx-scope": 1,
+    "react/jsx-no-undef": 1
+  },
+  "plugins": [
+    "react"
+  ]
 }

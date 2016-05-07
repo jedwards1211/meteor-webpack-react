@@ -1,27 +1,31 @@
-require('shelljs/global');
-var dirs = require('./dirs');
-var fs = require('fs');
-var path = require('path');
+var shell = require('shelljs')
+var dirs = require('./dirs')
+var fs = require('fs')
+var path = require('path')
 
-dirs.lib = path.join(dirs.webpack, 'lib');
-if (!fs.existsSync(dirs.lib)) mkdir(dirs.lib);
+dirs.lib = path.join(dirs.webpack, 'lib')
+if (!fs.existsSync(dirs.lib)) shell.mkdir(dirs.lib)
 
+var coreJsVersion = JSON.parse(fs.readFileSync('node_modules/core-js/package.json')).version
+var targetFileName = 'core-js-no-number.js'
+var currentFileExist = fs.existsSync(path.join(dirs.lib, targetFileName))
+var currentFileFewLines = currentFileExist ?
+  fs.readFileSync(path.join(dirs.lib, targetFileName)).toString().substr(0, 130) : ''
+var currentFileVersionRegex = /core-js (\d.\d.\d+)/m
+var currentFileVersion = currentFileVersionRegex.test(currentFileFewLines) ?
+  currentFileVersionRegex.exec(currentFileFewLines)[1] : false
 
-var coreJsVersion = JSON.parse(fs.readFileSync('node_modules/core-js/package.json')).version;
-var targetFile = 'core-js-no-number-' + coreJsVersion + '.js';
-
-if (!fs.existsSync(path.join(dirs.lib, targetFile))) {
-  echo('Building core-js@' + coreJsVersion + ' without ES6 number constructor...');
-  cd('node_modules/core-js');
-  exec('npm install');
-  cd(__dirname);  
-  exec('npm run build-core-js');
-  cd('node_modules/core-js');
-  mv('core-js-no-number.js', path.join(dirs.lib, targetFile));
-  rm('-rf', 'node_modules');
-  cd(dirs.lib);
-  ln('-sf', targetFile, 'core-js-no-number.js');
+if (coreJsVersion !== currentFileVersion) {
+  console.log('Building core-js@' + coreJsVersion + ' without ES6 number constructor...')
+  require('core-js-builder')({
+    modules: ['es5', 'es6', 'es7', 'core.dict', 'web'],
+    blacklist: ['es6.number.constructor'],
+  }).then(function(code) {
+    fs.writeFileSync(path.join(dirs.lib, targetFileName), code)
+  }).catch(function(error) {
+    console.error('core-js build error', error.stack)
+  })
 }
 else {
-  echo('core-js@' + coreJsVersion + ' without ES6 number constructor is up to date');
+  console.log('core-js@' + coreJsVersion + ' without ES6 number constructor is up to date')
 }

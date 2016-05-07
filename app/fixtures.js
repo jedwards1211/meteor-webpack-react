@@ -1,23 +1,25 @@
 /* global Accounts */
-import {Posts} from './collections';
+import {Posts} from './collections'
+
+/* eslint-disable no-console */
 
 export function createPosts() {
-  console.log('Creating fake posts');
+  console.log('Creating fake posts')
   [1, 2, 3, 4].forEach(function(count) {
     Posts.insert({
       name: 'Test post # ' + count,
       desc: 'How now brown cow',
-    });
-  });
+    })
+  })
 }
 
 export function createUsers() {
-  console.log('Creating fake users');
+  console.log('Creating fake users')
   ['Bob', 'Jane', 'Max'].forEach(function(name) {
     Accounts.createUser({
       username: name,
       password: 'password',
       profile: {},
-    });
-  });
+    })
+  })
 }

@@ -1,12 +1,22 @@
-var path = require('path');
-var webpackConfig = require('./webpack/webpack.config.client.js');
+process.env.NODE_ENV = 'production'
+
+var webpackConfig = require('./webpack/make-webpack-config')({
+  karma: true,
+  target: 'client',
+  mode: 'production',
+  useDevServer: true,
+  webpackPort: 8080,
+  entry: []
+})
 
 module.exports = function (config) {
   config.set({
     //singleRun: true,
     reporters: [ 'dots' ],
     browsers: [ 'Chrome' ],
-    files: [ './test/karma.bundle.js' ],
+    files: [
+      'test/clientUnitTests.js'
+    ],
     frameworks: [ 'jasmine' ],
     plugins: [
       'karma-chrome-launcher',
@@ -18,20 +28,10 @@ module.exports = function (config) {
     ],
     // run the bundle through the webpack and sourcemap plugins
     preprocessors: {
-      './test/karma.bundle.js': [ 'webpack', 'sourcemap' ]
+      './test/clientUnitTests.js': [ 'webpack', 'sourcemap' ]
     },
     // use our own webpack config to mirror test setup
-    webpack: {
-      entry: [
-        './lib/core-js-no-number',
-        'regenerator/runtime',
-      ],
-      devtool: 'eval-source-map',
-      resolve: webpackConfig.resolve,
-      module: { loaders: webpackConfig.module.loaders },
-    },
-    webpackMiddleware: {
-      noInfo: true,
-    }
-  });
-};
+    webpack: webpackConfig,
+    webpackMiddleware: webpackConfig.devServer || {},
+  })
+}

@@ -3,7 +3,7 @@
 This is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
 webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more convenient.
 
-Meteor's builtin ES2015 support doesn't allow you to `import`(/`require`), but **with this project you can use all ES2015/ES7 features supported by Babel/corejs/regenerator on the client and server today**, thanks to Webpack.  There are even source maps on the server thanks to https://github.com/evanw/node-source-map-support!  
+Meteor's builtin ES2015 support doesn't allow you to `import`(/`require`), but **with this project you can use all ES2015/ES7 features supported by Babel/corejs/regenerator on the client and server today**, thanks to Webpack.  ~~There are even source maps on the server thanks to https://github.com/evanw/node-source-map-support!~~ (better source map support will be reintegrated soon, or you can check out the `webpack-meteor-tools` branch!)
 
 There is a port of the Meteor simple-todos tutorial to this stack on the `simple-todos` branch.
 
@@ -56,6 +56,7 @@ There have been dependency issues with old versions of Node and NPM.  Please try
 > node dev.js
 ```
 Make sure to wait for Meteor to say it's listening, for the client `webpack-dev-server` and server `webpack --watch` to print out module/bundle info.  The site won't work until all are ready.
+Then visit http://localhost:9090 in your browser.
 
 ## Debugging/Profiling Server (dev mode)
 
@@ -74,7 +75,18 @@ This runs the app as if it were in production, but it's still watching your file
 > node prod.js
 ```
 Make sure to wait for Meteor to say it's listening, and for the client and server `webpack --watch` processes to print out module/bundle info.  The site won't work until all are ready.
+Then visit http://localhost:3000 in your browser.
 
+## Karma testing
+
+```
+> npm run karma
+```
+
+Any `.js` or `.jsx` files in `app/**/__tests__/client/unit` will be run in Karma.
+See https://github.com/jedwards1211/meteor-webpack-react/blob/master/app/components/__tests__/client/unit/AppSpec.js for an example.
+
+[enzyme](https://github.com/airbnb/enzyme) support is also included!
 
 ## Deployment
 

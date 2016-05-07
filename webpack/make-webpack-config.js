@@ -33,7 +33,7 @@ module.exports = function(options) {
   var entry       = options.entry        || [path.join(__dirname, '../app/main_' + target)]
   var meteorPort  = options.meteorPort   || 3000
   var webpackPort = options.webpackPort  || 9000
-  var meteorDir   = path.join(__dirname, '../meteor_core')
+  var meteorDir   = karma ? undefined : path.join(__dirname, '../meteor_core')
   var webpackDir  = __dirname
 
   if (!target) {

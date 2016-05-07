@@ -1,2 +1,2 @@
 #!/bin/bash
-cd meteor_core && meteor $@
+cd meteor && meteor $@

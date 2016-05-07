@@ -30,15 +30,15 @@ There is a port of the Meteor simple-todos tutorial to this stack on the `simple
 ## How it works
 
 The `dev.js`, `prod.js`, and `deploy.js` scripts will run Webpack, and symbolically link the generated bundles
-into the `meteor_core` directory.
+into the `meteor` directory.
 
-In prod mode, `meteor_core` gets the webpack client and server bundles via the soft links `meteor_core/client/client.bundle.js` and `meteor_core/server/server.bundle.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
+In prod mode, `meteor` gets the webpack client and server bundles via the soft links `meteor/client/client.bundle.js` and `meteor/server/server.bundle.js`.  Two instances of `webpack --watch` are running, one to make the client bundle and one to make the server bundle.
 
-In dev mode, both `webpack-dev-server` and `meteor_core` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor_core/client/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
+In dev mode, both `webpack-dev-server` and `meteor` run simultaneously on different ports (9090 and 3000, respectively), and a `webpack --watch` is also running to compile and output the server code.  A script in `meteor/client/loadClientBundle.html` inserts a `<script>` tag linking to the bundle from webpack-dev-server via port 9090 on the page's host.  (It's a bit weird I know, but one can't have a relative URL to a different port, and just putting a script tag to `http://localhost:9090/...` wouldn't work if you're testing on separate device from your dev box).
 
 ### Windows note
 
-`meteor_core/client/client.bundle.js` is a soft link to `webpack/assets/client.bundle.js`.  
+`meteor/client/client.bundle.js` is a soft link to `webpack/assets/client.bundle.js`.  
 (Similarly for the server bundle.) I don't know
 if the soft link will work on Windows.  If not, you can just copy the bundle in, but *make sure
 to rename it to `main.js`* so that Meteor loads it after everything else.
@@ -122,7 +122,7 @@ Put your settings in `settings/devel.json` & `settings/prod.json` and they will 
 
 ## Running Meteor Commands
 
-As a convenience you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor_core` and then run `meteor` from that directory as well.
+As a convenience you can run `./met` in the root directory to run the `meteor` command. However you can still `cd meteor` and then run `meteor` from that directory as well.
 
 ```
 ./met  --version

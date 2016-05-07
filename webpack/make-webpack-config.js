@@ -5,6 +5,7 @@ var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var _ = require('lodash')
 var babelMerge = require('./babel-merge')
 var RunInMeteorPlugin = require('webpack-meteor-tools/lib/RunInMeteorPlugin')
+var dirs = require('../dirs')
 
 module.exports = function(options) {
   var argv        = require('yargs').argv
@@ -35,8 +36,7 @@ module.exports = function(options) {
   var entry       = options.entry        || [path.join(__dirname, '../app/main_' + target)]
   var meteorPort  = options.meteorPort   || 3000
   var webpackPort = options.webpackPort  || 9000
-  var meteorDir   = karma ? undefined : path.join(__dirname, '../meteor_core')
-  var webpackDir  = __dirname
+  var meteorDir   = karma ? undefined : dirs.meteor
 
   if (!target) {
     throw new Error('you must specify a target with --target or options.target')

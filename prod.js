@@ -5,7 +5,7 @@ require('./core-js-custom-build')
 
 process.env.NODE_ENV = 'production'
 require('./runWebpackConfigs')({
-  mode: 'prod',
+  mode: 'production',
   watch: true
 }, function(err) {
   if (err) throw err

@@ -4,7 +4,7 @@ var dirs = require('./dirs')
 require('./core-js-custom-build')
 
 require('./runWebpackConfigs')({
-  mode: 'dev',
+  mode: 'development',
   watch: true
 }, function(err) {
   if (err) throw err

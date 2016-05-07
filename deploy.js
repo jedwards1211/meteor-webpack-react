@@ -1,4 +1,4 @@
-var shell = require('shelljs/global')
+var shell = require('shelljs')
 var path = require('path')
 
 if (!process.argv[2]) {

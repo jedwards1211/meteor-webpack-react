@@ -1,5 +1,7 @@
 # meteor-webpack-react
 
+**Deprecated**: this project doesn't support Meteor 1.3+.  Instead, check out [jedwards1211/crater](https://github.com/jedwards1211/crater).
+
 This is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
 webpack-dev-server is used with [react-transform](https://github.com/gaearon/babel-plugin-react-transform).  There are a bunch of run and build scripts to make things more convenient.
 
